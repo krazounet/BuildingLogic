@@ -13,6 +13,15 @@ public class Polymino {
     boolean recto;
 
    public static List<Polymino> carre = getCarre();
+   public static List<Polymino> L = getL();
+
+    private static List<Polymino> getL() {
+        List<Polymino> polyminoList =new ArrayList<>();
+        List<Tuile> tuileList=new ArrayList<>();
+        polyminoList.add(new Polymino(tuileList,3,2,TypePolymino.L,0,true));
+
+        return polyminoList;
+    }
 
     private static List<Polymino> getCarre() {
         List<Polymino> polyminoList =new ArrayList<>();

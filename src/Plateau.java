@@ -45,16 +45,18 @@ public class Plateau {
         return true;
     }
 
-    //place les tuiles sur le plateau, mets a jour la liste des cases vides.
+    //place le polymino sur le plateau, mets a jour la liste des cases vides.
     public void placePolymino(Case case_vide, Polymino polymino) {
         int x_case_origine=case_vide.coordonnee.x;
         int y_case_origine=case_vide.coordonnee.y;
         for (Tuile tuile : polymino.tuileList ){
             int x_case_destination = x_case_origine+tuile.coordonnee.x;
             int y_case_destination = y_case_origine+tuile.coordonnee.y;
-            //mise a jour du tableau
+            //on retire de la list des cases vide la case de destination
+            caseVideList.remove(tableau[x_case_destination][y_case_destination]);
+            //mise a jour de la case du tableau
             tableau[x_case_destination][y_case_destination]=tuile;
-            //mise a jour de la tuile
+            //mise a jour des coordonnees de la tuile
             tuile.coordonnee.x=x_case_destination;
             tuile.coordonnee.y=y_case_destination;
         }

@@ -6,7 +6,7 @@ import Enum.*;
 public class Polymino {
 
     List<Tuile> tuileList;
-    int hauteur;
+    int hauteur;//ici c'est la hauteur du polymino en nombre de tuile. Confusion avec hauteur du batiment dans la tuile.
     int largeur;
     TypePolymino typePolymino;
     int orientation;

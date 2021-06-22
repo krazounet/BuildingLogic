@@ -1,6 +1,7 @@
 package Enum;
 
-public enum TypeIndice {
+public enum TypeIndicePicross {
     LIGNE,
     COLONNE,
 }
+

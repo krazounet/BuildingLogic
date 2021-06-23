@@ -8,6 +8,7 @@ public class Piece {
 
     public Piece(List<Polymino> polyminoList) {
         this.polyminoList = polyminoList;
+
     }
 
     public static Piece O = getO();
@@ -23,24 +24,24 @@ public class Piece {
         polyminoList.add(new Polymino(tuileList,3,2, TypePolymino.L,0,true));
 
         tuileList.clear();
-        tuileList.add(new Tuile(3,new Coordonnee(0,0)));
-        tuileList.add(new Tuile(2,new Coordonnee(1,0)));
-        tuileList.add(new Tuile(2,new Coordonnee(0,-1)));
-        tuileList.add(new Tuile(1,new Coordonnee(2,0)));
+        tuileList.add(new Tuile(3,new Coordonnee(0,1)));
+        tuileList.add(new Tuile(2,new Coordonnee(1,1)));
+        tuileList.add(new Tuile(2,new Coordonnee(0,0)));
+        tuileList.add(new Tuile(1,new Coordonnee(2,1)));
         polyminoList.add(new Polymino(tuileList,2,3, TypePolymino.L,1,true));
 
         tuileList.clear();
-        tuileList.add(new Tuile(3,new Coordonnee(0,0)));
-        tuileList.add(new Tuile(2,new Coordonnee(-1,0)));
-        tuileList.add(new Tuile(2,new Coordonnee(0,-1)));
-        tuileList.add(new Tuile(1,new Coordonnee(0,-2)));
+        tuileList.add(new Tuile(3,new Coordonnee(1,2)));
+        tuileList.add(new Tuile(2,new Coordonnee(0,2)));
+        tuileList.add(new Tuile(2,new Coordonnee(1,1)));
+        tuileList.add(new Tuile(1,new Coordonnee(1,0)));
         polyminoList.add(new Polymino(tuileList,3,2, TypePolymino.L,2,true));
 
         tuileList.clear();
-        tuileList.add(new Tuile(3,new Coordonnee(0,0)));
-        tuileList.add(new Tuile(2,new Coordonnee(-1,0)));
-        tuileList.add(new Tuile(2,new Coordonnee(0,1)));
-        tuileList.add(new Tuile(1,new Coordonnee(-2,0)));
+        tuileList.add(new Tuile(3,new Coordonnee(2,0)));
+        tuileList.add(new Tuile(2,new Coordonnee(1,0)));
+        tuileList.add(new Tuile(2,new Coordonnee(2,1)));
+        tuileList.add(new Tuile(1,new Coordonnee(0,0)));
         polyminoList.add(new Polymino(tuileList,3,2, TypePolymino.L,2,true));
 
 

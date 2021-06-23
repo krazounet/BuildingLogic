@@ -22,6 +22,16 @@ public class Polymino {
         this.typePolymino = typePolymino;
         this.orientation = orientation;
         this.recto = recto;
+        //algo bordure ?
+        updateBordure();
+    }
+
+    private void updateBordure() {
+        for (Tuile tuile : tuileList){
+            for (CoteBordure coteBordure : CoteBordure.values()){
+                tuile.maj_bordure_commune(coteBordure,tuileList);
+            }
+        }
     }
 
     public BufferedImage export (){

@@ -6,7 +6,7 @@ import java.util.Random;
 public class Probleme {
     Plateau plateau;
     List <Polymino> Liste_polyminos_utilises;
-    EnsembleIndices<Indice> ensembleIndices;
+    EnsembleIndices ensembleIndices;
 
     public Probleme() {
         //generation plateau
@@ -19,7 +19,7 @@ public class Probleme {
         placementPieces();
 
         //Creation des indices
-        ensembleIndices =new EnsembleIndices<>(plateau);
+        ensembleIndices =new EnsembleIndices(plateau);
 
     }
 
@@ -59,10 +59,16 @@ public class Probleme {
     }
 
     public void export() {
+        //creation de l'identifiant
+        String ident = ConfigPartie.largeur_plateau+"-"+ConfigPartie.hauteur_plateau;
+        for(Polymino poly : Liste_polyminos_utilises){
+            ident=ident+poly.getIdent();
+        }
         //export de la liste des pieces utilisee
         //export des indices et du tableau vierge
-        BufferedImage img_tab = plateau.export();
-        DrawTools.saveFile(img_tab,ConfigPartie.rep_export+"tableau.png");
+
         //export de la solution
+        BufferedImage img_tab = plateau.export();
+        DrawTools.saveFile(img_tab,ConfigPartie.rep_export+ident+".png");
     }
 }

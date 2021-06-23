@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Enum.*;
 
-public class EnsembleIndices<Indice> {
+public class EnsembleIndices {
     List<IndicePicross> indicePicrossListVertical;
     List<IndicePicross> indicePicrossListHorizontal;
     List<IndiceCase> indiceCaseList;
@@ -15,7 +15,7 @@ public class EnsembleIndices<Indice> {
             indicePicrossListVertical.add(new IndicePicross(abs, TypeIndicePicross.COLONNE,new ArrayList<>()));
         }
         for (int ord=0; ord < ConfigPartie.hauteur_plateau; ord++){
-            indicePicrossListHorizontal.add(new IndicePicross(ord, TypeIndicePicross.COLONNE,new ArrayList<>()));
+            indicePicrossListHorizontal.add(new IndicePicross(ord, TypeIndicePicross.LIGNE,new ArrayList<>()));
         }
 
         //les indices sont generes a partir du plateau

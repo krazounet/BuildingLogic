@@ -21,10 +21,13 @@ public class Coordonnee {
         }
        return null;
     }
-
-    public boolean equals(Coordonnee c_test){
-        if (c_test.x != this.x)return false;
-        if (c_test.y != this.y)return false;
+    @Override
+    public boolean equals(Object c_test){
+        if (this == c_test) { return true; }
+        if (c_test == null || getClass() != c_test.getClass()){return false;}
+        Coordonnee other =(Coordonnee)c_test;
+        if (other.x != this.x)return false;
+        if (other.y != this.y)return false;
         return true;
     }
 }

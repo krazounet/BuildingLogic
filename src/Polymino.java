@@ -44,4 +44,8 @@ public class Polymino {
         return img;
     }
 
+    public String getIdent (){
+        return this.typePolymino+String.valueOf(this.orientation)+this.recto;
+    }
+
 }

@@ -7,6 +7,7 @@ import Enum.*;
 public class Tuile extends Case{
     int hauteur;
 
+
     public Tuile(int hauteur,Coordonnee coord) {
         super();
         super.isVide=false;
@@ -17,10 +18,10 @@ public class Tuile extends Case{
     @Override
     public BufferedImage export(){
         //couleur == hauteur
-        BufferedImage img = ConfigPartie.hashMapHauteurImage.get(hauteur);
+        BufferedImage img = DrawTools.getImage(ConfigPartie.hashMapHauteurImage.get(hauteur));
         //bordure a ajouter
         BufferedImage bordures = this.bordureCase.export();
-        DrawTools.drawImageCenter(img,bordures,50,50);
+        DrawTools.drawImageCenter(img,bordures,(double) ConfigPartie.taille_tuile/2,(double) ConfigPartie.taille_tuile/2);
         return img;
     }
 
@@ -28,23 +29,26 @@ public class Tuile extends Case{
     //agit uniquement si la valeur de bordureCase est encore a false.
     public void maj_bordure_commune(CoteBordure coteBordure, List<Tuile> tuileList) {
         for (Tuile tuile : tuileList) {
-            if (this.coordonnee.getCoord(coteBordure).equals(tuile.coordonnee)) {
+            if (this == tuile)return;
+            Coordonnee coordonnee_adjacent=this.coordonnee.getCoord(coteBordure);
+            boolean b_test=coordonnee_adjacent.equals(tuile.coordonnee);
+            if (b_test) {
                 switch (coteBordure) {
-                    case BAS -> {
-                        this.maj_bordure(CoteBordure.BAS, true);
-                        tuile.maj_bordure(CoteBordure.HAUT, true);
+                    case BAS -> {//inversion
+                        tuile.maj_bordure(CoteBordure.BAS, false);
+                        this.maj_bordure(CoteBordure.HAUT, false);
                     }
-                    case HAUT -> {
-                        this.maj_bordure(CoteBordure.HAUT, true);
-                        tuile.maj_bordure(CoteBordure.BAS, true);
+                    case HAUT -> {//inversion
+                        tuile.maj_bordure(CoteBordure.HAUT, false);
+                        this.maj_bordure(CoteBordure.BAS, false);
                     }
                     case GAUCHE -> {
-                        this.maj_bordure(CoteBordure.GAUCHE, true);
-                        tuile.maj_bordure(CoteBordure.DROITE, true);
+                        this.maj_bordure(CoteBordure.GAUCHE, false);
+                        tuile.maj_bordure(CoteBordure.DROITE, false);
                     }
                     case DROITE -> {
-                        this.maj_bordure(CoteBordure.DROITE, true);
-                        tuile.maj_bordure(CoteBordure.GAUCHE, true);
+                        this.maj_bordure(CoteBordure.DROITE, false);
+                        tuile.maj_bordure(CoteBordure.GAUCHE, false);
                     }
                 }
             }

@@ -1,5 +1,4 @@
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 import Enum.*;
 
@@ -30,7 +29,7 @@ public class Polymino {
     private void updateBordure() {
         for (Tuile tuile : tuileList){
             for (CoteBordure coteBordure : CoteBordure.values()){
-                if (tuile.a_une_bordure(coteBordure))return;//possible si traite par une autre tuile pour gagner du temps
+                if (!tuile.a_une_bordure(coteBordure))continue;//possible si traite par une autre tuile pour gagner du temps
                 tuile.maj_bordure_commune(coteBordure,tuileList);
             }
         }
@@ -38,7 +37,10 @@ public class Polymino {
 
     public BufferedImage export (){
         BufferedImage img =new BufferedImage(largeur*100,hauteur*100, BufferedImage.TYPE_INT_ARGB);
-
+        for(Tuile tuile : tuileList){
+            BufferedImage img_tuile=tuile.export();
+            DrawTools.drawImageCenter(img,img_tuile,50+(tuile.coordonnee.x*100),50+(tuile.coordonnee.y*100));
+        }
         return img;
     }
 

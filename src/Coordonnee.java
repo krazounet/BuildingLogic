@@ -21,4 +21,10 @@ public class Coordonnee {
         }
        return null;
     }
+
+    public boolean equals(Coordonnee c_test){
+        if (c_test.x != this.x)return false;
+        if (c_test.y != this.y)return false;
+        return true;
+    }
 }

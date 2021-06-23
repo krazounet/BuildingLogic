@@ -11,15 +11,17 @@ public class ConfigPartie {
     public static int hauteur_plateau = 3;
 
     //config souhait piece
+    public static int nb_essai_max = 1000;
 
     //config souhait indice
 
     //config export graphique
     public static int taille_tuile = 100;
     public static String rep_image="image/";
-    public static BufferedImage img_fond = DrawTools.getImage(rep_image+"15x15.png");
-    public static BufferedImage img_vide = DrawTools.getImage(rep_image+"vide.png");//carre de 100*100 transparent
-    public static HashMap<Integer,BufferedImage> hashMapHauteurImage = getHashMapHauteurImage();
+    public static String rep_export="export/";
+    public static String img_fond = rep_image+"15x15.png";
+    public static String img_vide = rep_image+"vide.png";//carre de 100*100 transparent
+    public static HashMap<Integer,String> hashMapHauteurImage = getHashMapHauteurImage();
     public static HashMap<CoteBordure,BufferedImage> hashMapBorder = getHashMapBorder();
 
     private static HashMap<CoteBordure, BufferedImage> getHashMapBorder() {
@@ -34,11 +36,11 @@ public class ConfigPartie {
 public static final Logger LOGGER = Logger.getLogger( ConfigPartie.class.getName() );
 
 
-    private static HashMap<Integer, BufferedImage> getHashMapHauteurImage() {
-        HashMap<Integer, BufferedImage> a_retourner = new HashMap<>();
-        a_retourner.put(1,DrawTools.getImage(rep_image+"h1.png"));
-        a_retourner.put(2,DrawTools.getImage(rep_image+"h2.png"));
-        a_retourner.put(3,DrawTools.getImage(rep_image+"h3.png"));
+    private static HashMap<Integer, String> getHashMapHauteurImage() {
+        HashMap<Integer, String> a_retourner = new HashMap<>();
+        a_retourner.put(1,rep_image+"h1.png");
+        a_retourner.put(2,rep_image+"h2.png");
+        a_retourner.put(3,rep_image+"h3.png");
         return a_retourner;
     }
 

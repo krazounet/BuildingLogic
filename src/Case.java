@@ -22,7 +22,7 @@ public class Case {
         bordureCase.bordureBooleanHashMap.put(cote,bool);
     }
     public BufferedImage export(){
-        return DrawTools.getImage("/image/carre.png");
+        return DrawTools.getImage("image/carre.png");
     }
 
 }

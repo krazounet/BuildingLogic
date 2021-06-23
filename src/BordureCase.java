@@ -11,14 +11,14 @@ public class BordureCase {
 
     public BordureCase() {
         bordureBooleanHashMap = new HashMap<>();
-        bordureBooleanHashMap.put(CoteBordure.BAS,false);
-        bordureBooleanHashMap.put(CoteBordure.HAUT,false);
-        bordureBooleanHashMap.put(CoteBordure.GAUCHE,false);
-        bordureBooleanHashMap.put(CoteBordure.DROITE,false);
+        bordureBooleanHashMap.put(CoteBordure.BAS,true);
+        bordureBooleanHashMap.put(CoteBordure.HAUT,true);
+        bordureBooleanHashMap.put(CoteBordure.GAUCHE,true);
+        bordureBooleanHashMap.put(CoteBordure.DROITE,true);
     }
 
     public BufferedImage export(){
-        BufferedImage img = ConfigPartie.img_vide;
+        BufferedImage img = DrawTools.getImage(ConfigPartie.img_vide);
         for (CoteBordure coteBordure : CoteBordure.values()){
             if (bordureBooleanHashMap.get(coteBordure)){
                 DrawTools.drawImageCenter(img,ConfigPartie.hashMapBorder.get(coteBordure),50,50);

@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,9 +26,8 @@ public class Probleme {
     private void placementPieces() {
         //ici boucle pour essayer de placer des pieces
         int nb_essai=0;
-        int max_essai=1000;
         List <Piece> pieceListdisponibles =  getListPiece();
-        while (nb_essai<max_essai){
+        while (nb_essai<ConfigPartie.nb_essai_max){
             //on selectionne aleatoirement un polymino
             if (pieceListdisponibles.size() == 0){break;}//si aucune piece est disponible coupons l algo.
             Piece piece = pieceListdisponibles.get(new Random().nextInt(pieceListdisponibles.size()));
@@ -50,7 +50,7 @@ public class Probleme {
         }
     }
 
-    private List<Piece> getListPiece() {
+    public static List<Piece> getListPiece() {
         //devra etre customise si on veut une sélection intelligente
         List <Piece> list_a_retourner=new ArrayList<>();
         list_a_retourner.add(Piece.L);
@@ -61,7 +61,8 @@ public class Probleme {
     public void export() {
         //export de la liste des pieces utilisee
         //export des indices et du tableau vierge
-
+        BufferedImage img_tab = plateau.export();
+        DrawTools.saveFile(img_tab,ConfigPartie.rep_export+"tableau.png");
         //export de la solution
     }
 }

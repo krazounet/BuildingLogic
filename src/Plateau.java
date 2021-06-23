@@ -66,7 +66,11 @@ public class Plateau {
 
     public BufferedImage export(){
         BufferedImage img= new BufferedImage(ConfigPartie.largeur_plateau*ConfigPartie.taille_tuile,ConfigPartie.hauteur_plateau*ConfigPartie.taille_tuile,BufferedImage.TYPE_INT_ARGB);
-
+        for (int x=0; x<ConfigPartie.largeur_plateau; x++){
+            for (int y=0; y<ConfigPartie.hauteur_plateau; y++) {
+                DrawTools.drawImageCenter(img,tableau[x][y].export(),(double) ConfigPartie.taille_tuile/2+(x*ConfigPartie.taille_tuile),(double) ConfigPartie.taille_tuile/2+(y*ConfigPartie.taille_tuile));
+            }
+        }
         return img;
     }
 }

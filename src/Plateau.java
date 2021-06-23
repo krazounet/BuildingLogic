@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -61,5 +62,11 @@ public class Plateau {
             tuile.coordonnee.y=y_case_destination;
         }
 
+    }
+
+    public BufferedImage export(){
+        BufferedImage img= new BufferedImage(ConfigPartie.largeur_plateau*ConfigPartie.taille_tuile,ConfigPartie.hauteur_plateau*ConfigPartie.taille_tuile,BufferedImage.TYPE_INT_ARGB);
+
+        return img;
     }
 }

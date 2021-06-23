@@ -16,6 +16,7 @@ public class Polymino {
 
 
     public Polymino(List<Tuile> tuileList, int hauteur, int largeur, TypePolymino typePolymino, int orientation, boolean recto) {
+
         this.tuileList = tuileList;
         this.hauteur = hauteur;
         this.largeur = largeur;
@@ -29,6 +30,7 @@ public class Polymino {
     private void updateBordure() {
         for (Tuile tuile : tuileList){
             for (CoteBordure coteBordure : CoteBordure.values()){
+                if (tuile.a_une_bordure(coteBordure))return;//possible si traite par une autre tuile pour gagner du temps
                 tuile.maj_bordure_commune(coteBordure,tuileList);
             }
         }

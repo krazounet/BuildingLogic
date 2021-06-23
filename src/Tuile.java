@@ -1,5 +1,7 @@
 import java.awt.image.BufferedImage;
 import java.util.List;
+
+
 import Enum.*;
 
 public class Tuile extends Case{
@@ -25,49 +27,29 @@ public class Tuile extends Case{
     //compare pour cette tuile, si une tuile dans la liste a une bordure commune.
     //agit uniquement si la valeur de bordureCase est encore a false.
     public void maj_bordure_commune(CoteBordure coteBordure, List<Tuile> tuileList) {
-        switch (coteBordure){
-            case BAS -> {
-                if (this.bordureCase.BAS == true)return;//possible si traite par une autre tuile pour gagner du temps
-                for (Tuile tuile : tuileList){
-                    if ((tuile.coordonnee.x == this.coordonnee.x)&&(tuile.coordonnee.y == this.coordonnee.y-1)){//tuile est bien en dessous.
-                        this.bordureCase.BAS=true;
-                        tuile.bordureCase.HAUT=true;
-                        return;
+        for (Tuile tuile : tuileList) {
+            if (this.coordonnee.getCoord(coteBordure).equals(tuile.coordonnee)) {
+                switch (coteBordure) {
+                    case BAS -> {
+                        this.maj_bordure(CoteBordure.BAS, true);
+                        tuile.maj_bordure(CoteBordure.HAUT, true);
                     }
-                }
-            }
-            case HAUT -> {
-                if (this.bordureCase.HAUT == true)return;//possible si traite par une autre tuile pour gagner du temps
-                for (Tuile tuile : tuileList){
-                    if ((tuile.coordonnee.x == this.coordonnee.x)&&(tuile.coordonnee.y == this.coordonnee.y+1)){//tuile est bien au dessus.
-                        this.bordureCase.HAUT=true;
-                        tuile.bordureCase.BAS=true;
-                        return;
+                    case HAUT -> {
+                        this.maj_bordure(CoteBordure.HAUT, true);
+                        tuile.maj_bordure(CoteBordure.BAS, true);
                     }
-                }
-            }
-
-            case GAUCHE -> {
-                if (this.bordureCase.GAUCHE == true)return;//possible si traite par une autre tuile pour gagner du temps
-                for (Tuile tuile : tuileList){
-                    if ((tuile.coordonnee.x == this.coordonnee.x-1)&&(tuile.coordonnee.y == this.coordonnee.y)){//tuile est bien a gauche
-                        this.bordureCase.GAUCHE=true;
-                        tuile.bordureCase.DROITE=true;
-                        return;
+                    case GAUCHE -> {
+                        this.maj_bordure(CoteBordure.GAUCHE, true);
+                        tuile.maj_bordure(CoteBordure.DROITE, true);
                     }
-                }
-            }
-            case DROITE -> {
-                if (this.bordureCase.DROITE == true)return;//possible si traite par une autre tuile pour gagner du temps
-                for (Tuile tuile : tuileList){
-                    if ((tuile.coordonnee.x == this.coordonnee.x+1)&&(tuile.coordonnee.y == this.coordonnee.y)){//tuile est bien a droite
-                        this.bordureCase.DROITE=true;
-                        tuile.bordureCase.GAUCHE=true;
-                        return;
+                    case DROITE -> {
+                        this.maj_bordure(CoteBordure.DROITE, true);
+                        tuile.maj_bordure(CoteBordure.GAUCHE, true);
                     }
                 }
             }
 
         }
+
     }
 }

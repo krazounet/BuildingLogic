@@ -6,14 +6,20 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+
 
 import javax.imageio.ImageIO;
 
 public class DrawTools
 {
+    private DrawTools() {
+
+    }
+
     public static void drawImageTransformed(BufferedImage source, BufferedImage image, int spotX, int spotY, double rotation, double zoom)
     {
-        Graphics g = source.getGraphics();
+        var g = source.getGraphics();
         drawImageTransformed(g, image, spotX, spotY, rotation, zoom);
     }
 
@@ -25,7 +31,7 @@ public class DrawTools
             AffineTransform at = new AffineTransform();
             at.translate((image.getWidth() - image.getWidth() * zoom / 100) / 2, (image.getHeight() - image.getHeight() * zoom / 100) / 2);
             at.scale(zoom / 100, zoom / 100);
-//			at.translate(-card.getWidth() / 2, -card.getHeight() / 2);
+
             AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
             cardResized = scaleOp.filter(image, cardResized);
             image = cardResized;
@@ -65,7 +71,8 @@ public class DrawTools
         catch(IOException x)
         {
             x.printStackTrace();
-            System.out.println(filename);
+            ConfigPartie.LOGGER.log(Level.SEVERE, x.toString(), x);
+
 
         }
 

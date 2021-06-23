@@ -61,6 +61,7 @@ public class Probleme {
     public void export() {
         //export de la liste des pieces utilisee
         //export des indices et du tableau vierge
+
         //export de la solution
     }
 }

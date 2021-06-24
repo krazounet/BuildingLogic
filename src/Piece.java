@@ -95,17 +95,17 @@ public class Piece {
         polyminoList.add(new Polymino(tuileListS3t,3,2, TypePolymino.S,3,true));
 
         List<Tuile> tuileListS0f=new ArrayList<>();
-        tuileListS0f.add(new Tuile(1,new Coordonnee(0,0)));
+        tuileListS0f.add(new Tuile(1,new Coordonnee(0,1)));
         tuileListS0f.add(new Tuile(2,new Coordonnee(1,0)));
         tuileListS0f.add(new Tuile(2,new Coordonnee(1,1)));
-        tuileListS0f.add(new Tuile(1,new Coordonnee(2,1)));
+        tuileListS0f.add(new Tuile(1,new Coordonnee(2,0)));
         polyminoList.add(new Polymino(tuileListS0f,2,3, TypePolymino.S,0,false));
 
         List<Tuile> tuileListS1f=new ArrayList<>();
-        tuileListS1f.add(new Tuile(1,new Coordonnee(1,0)));
+        tuileListS1f.add(new Tuile(1,new Coordonnee(0,0)));
         tuileListS1f.add(new Tuile(2,new Coordonnee(1,1)));
         tuileListS1f.add(new Tuile(2,new Coordonnee(0,1)));
-        tuileListS1f.add(new Tuile(1,new Coordonnee(0,2)));
+        tuileListS1f.add(new Tuile(1,new Coordonnee(1,2)));
         polyminoList.add(new Polymino(tuileListS1f,3,2, TypePolymino.S,1,false));
 
 
@@ -196,29 +196,29 @@ public class Piece {
         List<Tuile> tuileListl0f=new ArrayList<>();
         tuileListl0f.add(new Tuile(2,new Coordonnee(0,0)));
         tuileListl0f.add(new Tuile(1,new Coordonnee(1,0)));
-        tuileListl0f.add(new Tuile(1,new Coordonnee(0,1)));
-        tuileListl0f.add(new Tuile(2,new Coordonnee(0,2)));
+        tuileListl0f.add(new Tuile(1,new Coordonnee(1,1)));
+        tuileListl0f.add(new Tuile(2,new Coordonnee(1,2)));
         polyminoList.add(new Polymino(tuileListl0f,3,2, TypePolymino.L,0,false));
 
         List<Tuile> tuileListl1f=new ArrayList<>();
         tuileListl1f.add(new Tuile(2,new Coordonnee(0,1)));
-        tuileListl1f.add(new Tuile(1,new Coordonnee(1,1)));
+        tuileListl1f.add(new Tuile(1,new Coordonnee(1,0)));
         tuileListl1f.add(new Tuile(1,new Coordonnee(0,0)));
-        tuileListl1f.add(new Tuile(2,new Coordonnee(2,1)));
+        tuileListl1f.add(new Tuile(2,new Coordonnee(2,0)));
         polyminoList.add(new Polymino(tuileListl1f,2,3, TypePolymino.L,1,false));
 
         List<Tuile> tuileListl2f=new ArrayList<>();
         tuileListl2f.add(new Tuile(2,new Coordonnee(1,2)));
         tuileListl2f.add(new Tuile(1,new Coordonnee(0,2)));
-        tuileListl2f.add(new Tuile(1,new Coordonnee(1,1)));
-        tuileListl2f.add(new Tuile(2,new Coordonnee(1,0)));
+        tuileListl2f.add(new Tuile(1,new Coordonnee(0,1)));
+        tuileListl2f.add(new Tuile(2,new Coordonnee(0,0)));
         polyminoList.add(new Polymino(tuileListl2f,3,2, TypePolymino.L,2,false));
 
         List<Tuile> tuileListl3f=new ArrayList<>();
-        tuileListl3f.add(new Tuile(3,new Coordonnee(2,0)));
-        tuileListl3f.add(new Tuile(2,new Coordonnee(1,0)));
-        tuileListl3f.add(new Tuile(2,new Coordonnee(2,1)));
-        tuileListl3f.add(new Tuile(1,new Coordonnee(0,0)));
+        tuileListl3f.add(new Tuile(2,new Coordonnee(2,0)));
+        tuileListl3f.add(new Tuile(1,new Coordonnee(1,1)));
+        tuileListl3f.add(new Tuile(1,new Coordonnee(2,1)));
+        tuileListl3f.add(new Tuile(2,new Coordonnee(0,1)));
         polyminoList.add(new Polymino(tuileListl3f,2,3, TypePolymino.L,3,false));
 
         return new Piece(polyminoList);

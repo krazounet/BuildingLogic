@@ -12,8 +12,10 @@ public class ConfigPartie {
 
     //config algo placement piece
     public static int nb_essai_max = 1000;
+    //TODO limiter le nombre de piece.
 
     //config souhait indice
+    //TODO comme pour Minecraft rendre parametrable l'affichage des indice. Piece neutre/visible/bon sens.
 
     //config export graphique
     public static int taille_tuile = 100;

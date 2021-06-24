@@ -7,8 +7,8 @@ public class ConfigPartie {
 
     private ConfigPartie(){}
     //config du plateau
-    public static int largeur_plateau = 3;
-    public static int hauteur_plateau = 3;
+    public static int largeur_plateau = 4;
+    public static int hauteur_plateau = 4;
 
     //config algo placement piece
     public static int nb_essai_max = 1000;
@@ -18,6 +18,7 @@ public class ConfigPartie {
     //config export graphique
     public static int taille_tuile = 100;
     public static String rep_image="image/";
+    public static String rep_image_polymino ="image/Polymino/";
     public static String rep_export="export/";
     public static String img_fond = rep_image+"15x15.png";
     public static String img_vide = rep_image+"vide.png";//carre de 100*100 transparent

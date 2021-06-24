@@ -55,6 +55,10 @@ public class Probleme {
         List <Piece> list_a_retourner=new ArrayList<>();
         list_a_retourner.add(Piece.L);
         list_a_retourner.add(Piece.O);
+        list_a_retourner.add(Piece.I);
+        list_a_retourner.add(Piece.S);
+        list_a_retourner.add(Piece.T);
+
         return list_a_retourner;
     }
 
@@ -67,7 +71,12 @@ public class Probleme {
         //fond de l'image
         BufferedImage fond = DrawTools.getImage(ConfigPartie.img_fond);
         //export de la liste des pieces utilisee
-
+        int x_poly = 150;
+        for(Polymino poly : Liste_polyminos_utilises){
+            BufferedImage img_poly=DrawTools.getImage(ConfigPartie.rep_image_polymino+poly.typePolymino+".png");
+            DrawTools.drawImageTransformed(fond,img_poly,x_poly,100,0,100);
+            x_poly=x_poly+150;
+        }
         //export des indices et du tableau vierge
         BufferedImage img_probleme=ensembleIndices.export();
         BufferedImage img_zoom = DrawTools.Zoom(img_probleme,200);

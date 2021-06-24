@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +63,11 @@ public class Probleme {
         return list_a_retourner;
     }
 
-    public void export() {
+    public void export(String numero) {
         //creation de l'identifiant
-        String ident = ConfigPartie.largeur_plateau+"-"+ConfigPartie.hauteur_plateau;
+        String ident = numero+" - "+ConfigPartie.largeur_plateau+"&"+ConfigPartie.hauteur_plateau+"@";
         for(Polymino poly : Liste_polyminos_utilises){
-            ident=ident+poly.getIdent();
+            ident=ident+" "+poly.getIdent();
         }
         //fond de l'image
         BufferedImage fond = DrawTools.getImage(ConfigPartie.img_fond);
@@ -82,10 +83,14 @@ public class Probleme {
         BufferedImage img_zoom = DrawTools.Zoom(img_probleme,200);
         DrawTools.drawImageTransformed(fond,img_zoom,850,850,0,100);
         //watermark
-
+        DrawTools.drawText(fond,ident, 850, 1700,"Arial", Color.BLACK, 40,0);
         DrawTools.saveFile(fond,ConfigPartie.rep_export+ident+"_PBM.png");
         //export de la solution
+        BufferedImage fond_sol = DrawTools.getImage(ConfigPartie.img_fond);
         BufferedImage img_tab = plateau.export();
-        DrawTools.saveFile(img_tab,ConfigPartie.rep_export+ident+"_SOL.png");
+        BufferedImage tab_zoom = DrawTools.Zoom(img_tab,200);
+        DrawTools.drawImageTransformed(fond_sol,tab_zoom,850,850,0,100);
+        DrawTools.drawText(fond_sol,ident, 850, 1700,"Arial", Color.BLACK, 40,0);
+        DrawTools.saveFile(fond_sol,ConfigPartie.rep_export+ident+"_SOL.png");
     }
 }

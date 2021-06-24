@@ -10,7 +10,7 @@ public class ConfigPartie {
     public static int largeur_plateau = 3;
     public static int hauteur_plateau = 3;
 
-    //config souhait piece
+    //config algo placement piece
     public static int nb_essai_max = 1000;
 
     //config souhait indice
@@ -21,6 +21,7 @@ public class ConfigPartie {
     public static String rep_export="export/";
     public static String img_fond = rep_image+"15x15.png";
     public static String img_vide = rep_image+"vide.png";//carre de 100*100 transparent
+    public static String img_case = rep_image+"carre.png";//carre de 100*100 avec bordure
     public static HashMap<Integer,String> hashMapHauteurImage = getHashMapHauteurImage();
     public static HashMap<CoteBordure,BufferedImage> hashMapBorder = getHashMapBorder();
 

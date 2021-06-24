@@ -64,11 +64,19 @@ public class Probleme {
         for(Polymino poly : Liste_polyminos_utilises){
             ident=ident+poly.getIdent();
         }
+        //fond de l'image
+        BufferedImage fond = DrawTools.getImage(ConfigPartie.img_fond);
         //export de la liste des pieces utilisee
-        //export des indices et du tableau vierge
 
+        //export des indices et du tableau vierge
+        BufferedImage img_probleme=ensembleIndices.export();
+        BufferedImage img_zoom = DrawTools.Zoom(img_probleme,200);
+        DrawTools.drawImageTransformed(fond,img_zoom,850,850,0,100);
+        //watermark
+
+        DrawTools.saveFile(fond,ConfigPartie.rep_export+ident+"_PBM.png");
         //export de la solution
         BufferedImage img_tab = plateau.export();
-        DrawTools.saveFile(img_tab,ConfigPartie.rep_export+ident+".png");
+        DrawTools.saveFile(img_tab,ConfigPartie.rep_export+ident+"_SOL.png");
     }
 }

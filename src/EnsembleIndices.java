@@ -42,11 +42,11 @@ public class EnsembleIndices {
         int y_tmp;
         for(IndicePicross ind : indicePicrossListVertical){
             //pour chaque indice il fau calculer l'ordonnee initiale  pour que ça fasse joli
-            y_tmp = 50+ (ConfigPartie.hauteur_plateau-ind.list_hauteurs.size())*50;
+            y_tmp = 100+ (ConfigPartie.hauteur_plateau-ind.list_hauteurs.size())*40;
             for (int haut : ind.list_hauteurs){
                 BufferedImage htmp = DrawTools.getImage(ConfigPartie.hashMapHauteurImage.get(haut));
-                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,50);
-                y_tmp=y_tmp+50;
+                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,30);
+                y_tmp=y_tmp+40;
             }
             x_tmp=x_tmp+ConfigPartie.taille_tuile;
         }
@@ -54,11 +54,11 @@ public class EnsembleIndices {
 
         y_tmp=(ConfigPartie.hauteur_plateau*50)+75;
         for(IndicePicross ind : indicePicrossListHorizontal){
-            x_tmp=50+(ConfigPartie.largeur_plateau-ind.list_hauteurs.size())*50;
+            x_tmp=100+(ConfigPartie.largeur_plateau-ind.list_hauteurs.size())*40;
             for (int haut : ind.list_hauteurs){
                 BufferedImage htmp = DrawTools.getImage(ConfigPartie.hashMapHauteurImage.get(haut));
-                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,50);
-                x_tmp=x_tmp+50;
+                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,30);
+                x_tmp=x_tmp+40;
             }
 
             y_tmp=y_tmp+ConfigPartie.taille_tuile;

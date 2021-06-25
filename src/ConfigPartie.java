@@ -7,8 +7,8 @@ public class ConfigPartie {
 
     private ConfigPartie(){}
     //config du plateau
-    public static int largeur_plateau = 4;
-    public static int hauteur_plateau = 4;
+    public static int largeur_plateau = 6;
+    public static int hauteur_plateau = 6;
 
     //config algo placement piece
     public static int nb_essai_max = 1000;

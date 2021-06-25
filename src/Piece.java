@@ -120,8 +120,17 @@ public class Piece {
         tuileListS0t.add(new Tuile(2,new Coordonnee(1,1)));
         tuileListS0t.add(new Tuile(1,new Coordonnee(2,1)));
         polyminoList.add(new Polymino(tuileListS0t,TypePolymino.S,0,true));
+        
+        polyminoList.add(getRotation(polyminoList.get(0), 1, false));
+        polyminoList.add(getRotation(polyminoList.get(0), 2, false));
+        polyminoList.add(getRotation(polyminoList.get(0), 3, false));
 
-        List<Tuile> tuileListS1t=new ArrayList<>();
+        polyminoList.add(getRotation(polyminoList.get(0), 0, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 1, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 2, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 3, true));
+
+/*        List<Tuile> tuileListS1t=new ArrayList<>();
         tuileListS1t.add(new Tuile(2,new Coordonnee(1,0)));
         tuileListS1t.add(new Tuile(3,new Coordonnee(1,1)));
         tuileListS1t.add(new Tuile(2,new Coordonnee(0,1)));
@@ -154,7 +163,7 @@ public class Piece {
         tuileListS1f.add(new Tuile(2,new Coordonnee(1,1)));
         tuileListS1f.add(new Tuile(2,new Coordonnee(0,1)));
         tuileListS1f.add(new Tuile(1,new Coordonnee(1,2)));
-        polyminoList.add(new Polymino(tuileListS1f,TypePolymino.S,1,false));
+        polyminoList.add(new Polymino(tuileListS1f,TypePolymino.S,1,false));*/
 
 
         return new Piece(polyminoList);
@@ -169,8 +178,17 @@ public class Piece {
         tuileListI0t.add(new Tuile(2,new Coordonnee(0,2)));
         tuileListI0t.add(new Tuile(1,new Coordonnee(0,3)));
         polyminoList.add(new Polymino(tuileListI0t,TypePolymino.I,0,true));
+        
+        polyminoList.add(getRotation(polyminoList.get(0), 1, false));
+        polyminoList.add(getRotation(polyminoList.get(0), 2, false));
+        polyminoList.add(getRotation(polyminoList.get(0), 3, false));
 
-        List<Tuile> tuileListI1t=new ArrayList<>();
+        polyminoList.add(getRotation(polyminoList.get(0), 0, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 1, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 2, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 3, true));
+
+/*        List<Tuile> tuileListI1t=new ArrayList<>();
         tuileListI1t.add(new Tuile(2,new Coordonnee(0,0)));
         tuileListI1t.add(new Tuile(3,new Coordonnee(1,0)));
         tuileListI1t.add(new Tuile(2,new Coordonnee(2,0)));
@@ -203,7 +221,7 @@ public class Piece {
         tuileListI1f.add(new Tuile(2,new Coordonnee(1,0)));
         tuileListI1f.add(new Tuile(2,new Coordonnee(2,0)));
         tuileListI1f.add(new Tuile(1,new Coordonnee(3,0)));
-        polyminoList.add(new Polymino(tuileListI1f,TypePolymino.I,1,false));
+        polyminoList.add(new Polymino(tuileListI1f,TypePolymino.I,1,false));*/
 
 
 
@@ -219,8 +237,17 @@ public class Piece {
         tuileListl0t.add(new Tuile(2,new Coordonnee(0,1)));
         tuileListl0t.add(new Tuile(1,new Coordonnee(0,2)));
         polyminoList.add(new Polymino(tuileListl0t,TypePolymino.L,0,true));
+        
+        polyminoList.add(getRotation(polyminoList.get(0), 1, false));
+        polyminoList.add(getRotation(polyminoList.get(0), 2, false));
+        polyminoList.add(getRotation(polyminoList.get(0), 3, false));
 
-        List<Tuile> tuileListl1t=new ArrayList<>();
+        polyminoList.add(getRotation(polyminoList.get(0), 0, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 1, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 2, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 3, true));
+
+/*        List<Tuile> tuileListl1t=new ArrayList<>();
         tuileListl1t.add(new Tuile(3,new Coordonnee(0,1)));
         tuileListl1t.add(new Tuile(2,new Coordonnee(1,1)));
         tuileListl1t.add(new Tuile(2,new Coordonnee(0,0)));
@@ -267,7 +294,7 @@ public class Piece {
         tuileListl3f.add(new Tuile(1,new Coordonnee(1,1)));
         tuileListl3f.add(new Tuile(1,new Coordonnee(2,1)));
         tuileListl3f.add(new Tuile(2,new Coordonnee(0,1)));
-        polyminoList.add(new Polymino(tuileListl3f,TypePolymino.L,3,false));
+        polyminoList.add(new Polymino(tuileListl3f,TypePolymino.L,3,false));*/
 
         return new Piece(polyminoList);
     }
@@ -280,8 +307,17 @@ public class Piece {
         tuileListO0t.add(new Tuile(2,new Coordonnee(0,1)));
         tuileListO0t.add(new Tuile(1,new Coordonnee(1,1)));
         polyminoList.add(new Polymino(tuileListO0t,TypePolymino.O,0,true));
+        
+        polyminoList.add(getRotation(polyminoList.get(0), 1, false));
+        polyminoList.add(getRotation(polyminoList.get(0), 2, false));
+        polyminoList.add(getRotation(polyminoList.get(0), 3, false));
 
-        List<Tuile> tuileListO1t=new ArrayList<>();
+        polyminoList.add(getRotation(polyminoList.get(0), 0, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 1, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 2, true));
+        polyminoList.add(getRotation(polyminoList.get(0), 3, true));
+
+/*        List<Tuile> tuileListO1t=new ArrayList<>();
         tuileListO1t.add(new Tuile(2,new Coordonnee(0,0)));
         tuileListO1t.add(new Tuile(1,new Coordonnee(1,0)));
         tuileListO1t.add(new Tuile(1,new Coordonnee(0,1)));
@@ -314,7 +350,7 @@ public class Piece {
         tuileListO3f.add(new Tuile(3,new Coordonnee(1,0)));
         tuileListO3f.add(new Tuile(1,new Coordonnee(0,1)));
         tuileListO3f.add(new Tuile(2,new Coordonnee(1,1)));
-        polyminoList.add(new Polymino(tuileListO3f,TypePolymino.O,3,false));
+        polyminoList.add(new Polymino(tuileListO3f,TypePolymino.O,3,false));*/
 
         return new Piece(polyminoList);
 

@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import Enum.*;
 
 public class Probleme {
     Plateau plateau;
@@ -52,13 +53,21 @@ public class Probleme {
     }
 
     public static List<Piece> getListPiece() {
-        //devra etre customise si on veut une sélection intelligente
+        //chaque polymino est ajoute autant de fois que nécessaire.
         List <Piece> list_a_retourner=new ArrayList<>();
-        list_a_retourner.add(Piece.L);
-        list_a_retourner.add(Piece.O);
-        list_a_retourner.add(Piece.I);
-        list_a_retourner.add(Piece.S);
-        list_a_retourner.add(Piece.T);
+        for (TypePolymino tp : TypePolymino.values()){
+            for (int nb_fois=0; nb_fois<ConfigPartie.nb_chaque_piece;nb_fois++){
+                list_a_retourner.add(new Piece(tp));
+            }
+
+        }
+     //   list_a_retourner.add(new Piece(Piece.L));
+     //   list_a_retourner.add(new Piece(Piece.L));
+     //   list_a_retourner.add(Piece.O);
+     //   list_a_retourner.add(Piece.I);
+
+     //   list_a_retourner.add(Piece.S);
+     //   list_a_retourner.add(Piece.T);
 
         return list_a_retourner;
     }
@@ -94,7 +103,7 @@ public class Probleme {
         BufferedImage img_tab = plateau.export();
         BufferedImage tab_zoom = DrawTools.Zoom(img_tab,200);
         DrawTools.drawImageTransformed(fond_sol,tab_zoom,850,850,0,100);
-        DrawTools.drawText(fond_sol,ident, 200, 1730,"Arial", Color.BLACK, 20,0);
+        DrawTools.drawText(fond_sol,ident, 850, 1720,"Arial", Color.BLACK, 20,0);
         DrawTools.saveFile(fond_sol,ConfigPartie.rep_export+ident+"_SOL.png");
     }
 }

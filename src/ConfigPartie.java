@@ -12,6 +12,7 @@ public class ConfigPartie {
 
     //config algo placement piece
     public static int nb_essai_max = 1000;
+    public static int nb_chaque_piece = 1;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
     //TODO limiter le nombre de piece.
 
     //config souhait indice

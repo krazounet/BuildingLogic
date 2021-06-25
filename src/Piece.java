@@ -9,6 +9,19 @@ public class Piece {
 
     public Piece(List<Polymino> polyminoList) {
         this.polyminoList = polyminoList;
+    }
+    public Piece(Piece piece_to_clone) {
+        this.polyminoList = piece_to_clone.polyminoList;
+    }
+    public Piece(TypePolymino tp) {
+        switch (tp){
+            case I -> this.polyminoList = getI().polyminoList;
+            case T -> this.polyminoList = getT().polyminoList;
+            case O -> this.polyminoList = getO().polyminoList;
+            case S -> this.polyminoList = getS().polyminoList;
+            case L -> this.polyminoList = getL().polyminoList;
+            default -> this.polyminoList=new ArrayList<>();
+        }
 
     }
 

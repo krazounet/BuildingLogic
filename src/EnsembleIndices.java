@@ -52,7 +52,7 @@ public class EnsembleIndices {
         }
         //indice horizontal
 
-        y_tmp=(ConfigPartie.largeur_plateau*50)+75;
+        y_tmp=(ConfigPartie.hauteur_plateau*50)+75;
         for(IndicePicross ind : indicePicrossListHorizontal){
             x_tmp=50+(ConfigPartie.largeur_plateau-ind.list_hauteurs.size())*50;
             for (int haut : ind.list_hauteurs){

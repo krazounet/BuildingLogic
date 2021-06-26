@@ -61,13 +61,7 @@ public class Probleme {
             }
 
         }
-     //   list_a_retourner.add(new Piece(Piece.L));
-     //   list_a_retourner.add(new Piece(Piece.L));
-     //   list_a_retourner.add(Piece.O);
-     //   list_a_retourner.add(Piece.I);
 
-     //   list_a_retourner.add(Piece.S);
-     //   list_a_retourner.add(Piece.T);
 
         return list_a_retourner;
     }

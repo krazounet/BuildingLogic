@@ -5,20 +5,30 @@ import java.util.List;
 import Enum.*;
 
 public class Tuile extends Case{
-    int hauteur;
+    HauteurTuile hauteur;
+    boolean recto;
 
 
-    public Tuile(int hauteur,Coordonnee coord) {
+    public Tuile(HauteurTuile hauteur,Coordonnee coord,boolean recto) {
         super();
         super.isVide=false;
         super.coordonnee=coord;
         this.hauteur = hauteur;
+        this.recto = recto;
+    }
+    
+    public int getHauteur()
+    {
+    	if(recto)
+    		return(hauteur.hauteurRecto);
+    	else
+    		return(hauteur.hauteurVerso);
     }
 
     @Override
     public BufferedImage export(){
         //couleur == hauteur
-        BufferedImage img = DrawTools.getImage(ConfigPartie.hashMapHauteurImage.get(hauteur));
+        BufferedImage img = DrawTools.getImage(ConfigPartie.hashMapHauteurImage.get(getHauteur()));
         //bordure a ajouter
         BufferedImage bordures = this.bordureCase.export();
         DrawTools.drawImageCenter(img,bordures,(double) ConfigPartie.taille_tuile/2,(double) ConfigPartie.taille_tuile/2);

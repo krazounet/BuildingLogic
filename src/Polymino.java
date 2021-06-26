@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 import Enum.*;
 
@@ -77,7 +78,7 @@ public class Polymino {
     	}
     	return(maxY);
     }
-
+    
     private void updateBordure() {
         for (Tuile tuile : tuileList){
             for (CoteBordure coteBordure : CoteBordure.values()){
@@ -99,5 +100,103 @@ public class Polymino {
     public String getIdent (){
         return this.typePolymino+String.valueOf(this.orientation)+this.recto;
     }
+
+    public static List<Polymino> getFullListPolymino(Polymino polyminoModele)
+    {
+    	List<Polymino> listPolymino = new ArrayList<>();
+    	listPolymino.add(getRotation(polyminoModele, 0, false));
+    	listPolymino.add(getRotation(polyminoModele, 1, false));
+    	listPolymino.add(getRotation(polyminoModele, 2, false));
+    	listPolymino.add(getRotation(polyminoModele, 3, false));
+
+    	if(ConfigPartie.rectoverso)
+    	{
+	    	listPolymino.add(getRotation(polyminoModele, 0, true));
+	    	listPolymino.add(getRotation(polyminoModele, 1, true));
+	    	listPolymino.add(getRotation(polyminoModele, 2, true));
+	    	listPolymino.add(getRotation(polyminoModele, 3, true));
+    	}
+    	
+    	removeDoublon(listPolymino);
+
+        return(listPolymino);
+    }
+    
+    private static void removeDoublon(List<Polymino> listPolymino)
+    {
+    	for(int pA = 0; pA < listPolymino.size() - 1; pA++)
+    	{
+    		Polymino polyA = listPolymino.get(pA);
+    		for(int pB = pA + 1; pB < listPolymino.size(); pB++)
+    		{
+        		Polymino polyB = listPolymino.get(pB);
+        		if(comparePolymino(polyA, polyB))
+        		{
+        			listPolymino.remove(pB);
+        			pB--;
+        		}
+    		}
+    	}
+    }
+    
+    private static boolean comparePolymino(Polymino polyA, Polymino polyB)
+    {
+    	if(polyA.tuileList.size() != polyB.tuileList.size())
+    		return(false);
+
+    	for(Tuile tuileFromPolyA : polyA.tuileList)
+    	{
+    		boolean tuilePresente = false;
+        	for(Tuile tuileFromPolyB : polyB.tuileList)
+        	{
+        		if(tuileFromPolyA.coordonnee.x == tuileFromPolyB.coordonnee.x && tuileFromPolyA.coordonnee.y == tuileFromPolyB.coordonnee.y && tuileFromPolyA.getHauteur() == tuileFromPolyB.getHauteur())
+        		{
+        			tuilePresente = true;
+        			break;
+        		}
+        	}
+        	if(!tuilePresente)
+        		return(false);
+    	}
+    	return(true);
+    }
+
+	private static Polymino getRotation(Polymino polyminoSource, int rotation, boolean flip)
+	{
+		List<Tuile> tuileSource = new ArrayList<>();
+		for(Tuile tuileToAdd : polyminoSource.tuileList)
+		{
+			tuileSource.add(new Tuile(tuileToAdd.hauteur, new Coordonnee(tuileToAdd.coordonnee.x, tuileToAdd.coordonnee.y), polyminoSource.recto));
+		}
+		Polymino polyminoToReturn = new Polymino(tuileSource, polyminoSource.typePolymino, rotation, polyminoSource.recto);
+
+		for(int r = 0; r < rotation; r++)
+		{
+			List<Tuile> tuileList = new ArrayList<>();
+			for(Tuile tuileToAdd : polyminoToReturn.tuileList)
+			{
+				Coordonnee coordToAdd = new Coordonnee(polyminoToReturn.getMaxY() - tuileToAdd.coordonnee.y, tuileToAdd.coordonnee.x);
+				
+				tuileList.add(new Tuile(tuileToAdd.hauteur, coordToAdd, polyminoSource.recto));
+			}
+			
+			polyminoToReturn = new Polymino(tuileList, polyminoSource.typePolymino, rotation, polyminoSource.recto);
+		}
+
+		if(flip)
+		{
+			List<Tuile> tuileListFlip = new ArrayList<>();
+			for(Tuile tuileToAdd : polyminoToReturn.tuileList)
+			{
+				Coordonnee coordToAdd = new Coordonnee(polyminoToReturn.getMaxX() - tuileToAdd.coordonnee.x, tuileToAdd.coordonnee.y);
+				
+				tuileListFlip.add(new Tuile(tuileToAdd.hauteur, coordToAdd, !polyminoSource.recto));
+			}
+			
+			polyminoToReturn = new Polymino(tuileListFlip, polyminoSource.typePolymino, rotation, !polyminoSource.recto);
+		}
+		
+		return(polyminoToReturn);
+	}
 
 }

@@ -25,8 +25,8 @@ public class EnsembleIndices {
                 Tuile tuile_tmp=null;
                 if (case_tmp instanceof Tuile){tuile_tmp=(Tuile)case_tmp;}
                 if (tuile_tmp !=null){
-                    indicePicrossListVertical.get(case_tmp.coordonnee.x).list_hauteurs.add(tuile_tmp.hauteur);
-                    indicePicrossListHorizontal.get(case_tmp.coordonnee.y).list_hauteurs.add(tuile_tmp.hauteur);
+                    indicePicrossListVertical.get(case_tmp.coordonnee.x).list_hauteurs.add(tuile_tmp.getHauteur());
+                    indicePicrossListHorizontal.get(case_tmp.coordonnee.y).list_hauteurs.add(tuile_tmp.getHauteur());
                 }
             }
         }

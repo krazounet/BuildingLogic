@@ -6,6 +6,10 @@ import Enum.*;
 public class ConfigPartie {
 
     private ConfigPartie(){}
+    
+    //config pieces
+    
+    public static boolean rectoverso = true;
     //config du plateau
     public static int largeur_plateau = 6;
     public static int hauteur_plateau = 6;

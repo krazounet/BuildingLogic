@@ -79,6 +79,16 @@ public class Polymino {
     	return(maxY);
     }
     
+    public Polymino getClone()
+    {
+		List<Tuile> tuileSource = new ArrayList<>();
+		for(Tuile tuileToAdd : this.tuileList)
+		{
+			tuileSource.add(new Tuile(tuileToAdd.hauteur, new Coordonnee(tuileToAdd.coordonnee.x, tuileToAdd.coordonnee.y), this.recto));
+		}
+		return(new Polymino(tuileSource, this.typePolymino, this.orientation, this.recto));
+    }
+    
     private void updateBordure() {
         for (Tuile tuile : tuileList){
             for (CoteBordure coteBordure : CoteBordure.values()){
@@ -163,12 +173,7 @@ public class Polymino {
 
 	private static Polymino getRotation(Polymino polyminoSource, int rotation, boolean flip)
 	{
-		List<Tuile> tuileSource = new ArrayList<>();
-		for(Tuile tuileToAdd : polyminoSource.tuileList)
-		{
-			tuileSource.add(new Tuile(tuileToAdd.hauteur, new Coordonnee(tuileToAdd.coordonnee.x, tuileToAdd.coordonnee.y), polyminoSource.recto));
-		}
-		Polymino polyminoToReturn = new Polymino(tuileSource, polyminoSource.typePolymino, rotation, polyminoSource.recto);
+		Polymino polyminoToReturn = polyminoSource.getClone();
 
 		for(int r = 0; r < rotation; r++)
 		{

@@ -30,7 +30,7 @@ public class Tuile extends Case{
         //couleur == hauteur
         BufferedImage img = DrawTools.getImage(ConfigPartie.hashMapHauteurImage.get(getHauteur()));
         //bordure a ajouter
-        BufferedImage bordures = this.bordureCase.export();
+        BufferedImage bordures = this.bordureCase.export(recto);
         DrawTools.drawImageCenter(img,bordures,(double) ConfigPartie.taille_tuile/2,(double) ConfigPartie.taille_tuile/2);
         return img;
     }

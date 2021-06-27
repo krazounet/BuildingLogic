@@ -26,17 +26,19 @@ public class ConfigPartie {
     public static int taille_tuile = 100;
     public static String rep_image="image/";
     public static String rep_image_polymino ="image/Polymino/";
+    public static String rep_image_bordures ="image/bordures/";
     public static String rep_export="export/";
     public static String img_fond = rep_image+"15x15.png";
     public static String img_vide = rep_image+"vide.png";//carre de 100*100 transparent
     public static String img_case = rep_image+"carre.png";//carre de 100*100 avec bordure
     public static HashMap<Integer,String> hashMapHauteurImage = getHashMapHauteurImage();
-    public static HashMap<CoteBordure,BufferedImage> hashMapBorder = getHashMapBorder();
+    public static HashMap<CoteBordure,BufferedImage> hashMapBorderR = getHashMapBorder("R");
+    public static HashMap<CoteBordure,BufferedImage> hashMapBorderV = getHashMapBorder("V");
 
-    private static HashMap<CoteBordure, BufferedImage> getHashMapBorder() {
+    private static HashMap<CoteBordure, BufferedImage> getHashMapBorder(String RV) {
         HashMap<CoteBordure,BufferedImage> hash_retour = new HashMap<>();
         for(CoteBordure cote:CoteBordure.values()){
-            hash_retour.put(cote,DrawTools.getImage(rep_image+cote+".png"));
+            hash_retour.put(cote,DrawTools.getImage(rep_image_bordures+RV+cote+".png"));
         }
         return hash_retour;
     }

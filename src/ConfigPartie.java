@@ -8,8 +8,9 @@ public class ConfigPartie {
     private ConfigPartie(){}
     
     //config pieces
-    
     public static boolean rectoverso = true;
+    public static boolean remove_doublon = true;
+
     //config du plateau
     public static int largeur_plateau = 6;
     public static int hauteur_plateau = 6;

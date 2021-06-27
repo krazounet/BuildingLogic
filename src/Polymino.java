@@ -127,7 +127,8 @@ public class Polymino {
 	    	listPolymino.add(getRotation(polyminoModele, 3, true));
     	}
     	
-    	removeDoublon(listPolymino);
+    	if(ConfigPartie.remove_doublon)
+    		removeDoublon(listPolymino);
 
         return(listPolymino);
     }

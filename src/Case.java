@@ -21,6 +21,9 @@ public class Case {
     public void maj_bordure(CoteBordure cote,Boolean bool){
         bordureCase.bordureBooleanHashMap.put(cote,bool);
     }
+    public BufferedImage exportGraphical(){
+        return DrawTools.getImage("image/carreB.png");
+    }
     public BufferedImage export(){
         return DrawTools.getImage("image/carre.png");
     }

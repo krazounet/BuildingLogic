@@ -4,6 +4,5 @@ public enum CoteBordure {
     HAUT,
     BAS,
     GAUCHE,
-    DROITE,
-    
+    DROITE    
 }

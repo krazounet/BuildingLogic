@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -12,12 +13,12 @@ public class ConfigPartie {
     public static boolean remove_doublon = true;
 
     //config du plateau
-    public static int largeur_plateau = 6;
-    public static int hauteur_plateau = 6;
+    public static int largeur_plateau = 5;
+    public static int hauteur_plateau = 5;
 
     //config algo placement piece
-    public static int nb_essai_max = 1000;
-    public static int nb_chaque_piece = 2;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
+    public static int nb_essai_max = 100000;
+    public static int nb_chaque_piece = 1;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
     //TODO limiter le nombre de piece.
 
     //config souhait indice
@@ -25,6 +26,9 @@ public class ConfigPartie {
 
     //config export graphique
     public static int taille_tuile = 100;
+    public static int epaisseur_bord = 6;
+    public static Color color_bordure_recto = Color.BLACK;
+    public static Color color_bordure_verso = Color.GREEN;
     public static String rep_image="image/";
     public static String rep_image_polymino ="image/Polymino/";
     public static String rep_image_bordures ="image/bordures/";

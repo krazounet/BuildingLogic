@@ -25,6 +25,13 @@ public class Tuile extends Case{
     		return(hauteur.hauteurVerso);
     }
 
+    public BufferedImage exportGraphical()
+    {
+        BufferedImage img = DrawTools.getImage("image/Type" + getHauteur() + ".png");
+        return img;
+    }
+
+
     @Override
     public BufferedImage export(){
         //couleur == hauteur

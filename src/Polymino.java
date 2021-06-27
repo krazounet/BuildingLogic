@@ -1,3 +1,8 @@
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +101,158 @@ public class Polymino {
                 tuile.maj_bordure_commune(coteBordure,tuileList);
             }
         }
+    }
+    
+    public BufferedImage exportGraphical()
+    {
+    	BufferedImage img = new BufferedImage((1 + this.getMaxX() - this.getMinX()) * ConfigPartie.taille_tuile, (1 + this.getMaxY() - this.getMinY()) * ConfigPartie.taille_tuile, BufferedImage.TYPE_INT_ARGB);
+    	for(Tuile tuile : tuileList)
+    	{
+    		DrawTools.drawImageTransformed(img, tuile.exportGraphical(), (ConfigPartie.taille_tuile / 2) + (tuile.coordonnee.x * ConfigPartie.taille_tuile), (ConfigPartie.taille_tuile / 2) + (tuile.coordonnee.y * ConfigPartie.taille_tuile), 0, 50);
+    	}
+    	
+    	drawBordures(img);
+    	return(img);
+    }
+    
+    public void drawBordures(BufferedImage img)
+    {
+    	for(Tuile tuile : tuileList)
+    	{
+    		for(CoteBordureG coteBordure : CoteBordureG.values())
+    		{
+        		if(!isThisTuileExist(tuile.coordonnee.x + getXBordure(coteBordure), tuile.coordonnee.y + getYBordure(coteBordure)))
+        		{
+        			if(tuile.recto)
+        				drawBordure(img, tuile, coteBordure, ConfigPartie.color_bordure_recto);
+        			else
+        				drawBordure(img, tuile, coteBordure, ConfigPartie.color_bordure_verso);
+        		}
+    		}
+    	}
+    }
+    
+    public void drawBordure(BufferedImage img, Tuile tuile, CoteBordureG coteBordure, Color color)
+    {
+    	Point start = getBordureStart(coteBordure);
+    	Point end = getBordureEnd(coteBordure);
+    	
+    	int tailleSquare = ConfigPartie.taille_tuile - ConfigPartie.epaisseur_bord * 2;
+    	
+    	start.x = ConfigPartie.taille_tuile * tuile.coordonnee.x + ConfigPartie.epaisseur_bord + start.x * tailleSquare;
+    	start.y = ConfigPartie.taille_tuile * tuile.coordonnee.y + ConfigPartie.epaisseur_bord + start.y * tailleSquare;
+
+    	end.x = ConfigPartie.taille_tuile * tuile.coordonnee.x + ConfigPartie.epaisseur_bord + end.x * tailleSquare;
+    	end.y = ConfigPartie.taille_tuile * tuile.coordonnee.y + ConfigPartie.epaisseur_bord + end.y * tailleSquare;
+    	
+		Graphics g = img.getGraphics();
+		Graphics2D g2 = (Graphics2D) g;
+
+		g2.setColor(color);
+		g2.setStroke(new BasicStroke(ConfigPartie.epaisseur_bord * 2));
+		g2.drawLine(start.x, start.y, end.x, end.y);
+    }
+
+    public Point getBordureStart(CoteBordureG coteBordure)
+    {
+    	int x = 0;
+    	int y = 0;
+    	switch(coteBordure)
+    	{
+    	case HAUT:
+    	case GAUCHE:
+    	case HAUT_GAUCHE:
+    		x = 0;
+    		y = 0;
+    		break;
+    	case BAS:
+    	case DROITE:
+    	case BAS_DROITE:
+    		x = 1;
+    		y = 1;
+    		break;
+    	case HAUT_DROITE:
+    		x = 1;
+    		y = 0;
+    		break;
+    	case BAS_GAUCHE:
+    		x = 0;
+    		y = 1;
+    		break;
+    	}
+    	return(new Point(x, y));
+    }
+    
+    public Point getBordureEnd(CoteBordureG coteBordure)
+    {
+    	int x = 0;
+    	int y = 0;
+    	switch(coteBordure)
+    	{
+    	case HAUT:
+    	case DROITE:
+    	case HAUT_DROITE:
+    		x = 1;
+    		y = 0;
+    		break;
+    	case BAS:
+    	case GAUCHE:
+    	case BAS_GAUCHE:
+    		x = 0;
+    		y = 1;
+    		break;
+    	case HAUT_GAUCHE:
+    		x = 0;
+    		y = 0;
+    		break;
+    	case BAS_DROITE:
+    		x = 1;
+    		y = 1;
+    		break;
+    	}
+    	return(new Point(x, y));
+    }
+    
+    public int getXBordure(CoteBordureG coteBordure)
+    {
+    	switch(coteBordure)
+    	{
+    	case GAUCHE:
+    	case HAUT_GAUCHE:
+    	case BAS_GAUCHE:
+    		return(-1);
+    	case DROITE:
+    	case HAUT_DROITE:
+    	case BAS_DROITE:
+    		return(1);
+		default:
+			return(0);
+    	}
+    }
+    
+    public int getYBordure(CoteBordureG coteBordure)
+    {
+    	switch(coteBordure)
+    	{
+    	case HAUT:
+    	case HAUT_GAUCHE:
+    	case HAUT_DROITE:
+    		return(-1);
+    	case BAS:
+    	case BAS_DROITE:
+    	case BAS_GAUCHE:
+    		return(1);
+		default :
+			return(0);
+    	}
+    }
+    
+    public boolean isThisTuileExist(int x, int y)
+    {
+    	for(Tuile tuile : tuileList)
+    		if(tuile.coordonnee.x == x && tuile.coordonnee.y == y)
+    			return(true);
+    	return(false);
     }
 
     public BufferedImage export (){

@@ -64,6 +64,16 @@ public class Plateau {
 
     }
 
+    public BufferedImage exportGraphical(){
+        BufferedImage img= new BufferedImage(ConfigPartie.largeur_plateau*ConfigPartie.taille_tuile,ConfigPartie.hauteur_plateau*ConfigPartie.taille_tuile,BufferedImage.TYPE_INT_ARGB);
+        for (int x=0; x<ConfigPartie.largeur_plateau; x++){
+            for (int y=0; y<ConfigPartie.hauteur_plateau; y++) {
+                DrawTools.drawImageTransformed(img,tableau[x][y].exportGraphical(),ConfigPartie.taille_tuile/2+(x*ConfigPartie.taille_tuile),ConfigPartie.taille_tuile/2+(y*ConfigPartie.taille_tuile), 0, 50);
+            }
+        }
+        return img;
+    }
+
     public BufferedImage export(){
         BufferedImage img= new BufferedImage(ConfigPartie.largeur_plateau*ConfigPartie.taille_tuile,ConfigPartie.hauteur_plateau*ConfigPartie.taille_tuile,BufferedImage.TYPE_INT_ARGB);
         for (int x=0; x<ConfigPartie.largeur_plateau; x++){

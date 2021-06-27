@@ -66,6 +66,42 @@ public class Probleme {
         return list_a_retourner;
     }
 
+    public void exportGraphical(String numero)
+    {
+        //creation de l'identifiant
+        String ident = numero+" - "+ConfigPartie.largeur_plateau+"&"+ConfigPartie.hauteur_plateau+"@";
+        for(Polymino poly : Liste_polyminos_utilises){
+            ident=ident+" "+poly.getIdent();
+        }
+        //fond de l'image
+        BufferedImage fond = DrawTools.getImage(ConfigPartie.img_fond);
+        //export de la liste des pieces utilisee
+        int x_poly = 150;
+        int y_poly = 0;//tous les 3 polys on va à la ligne
+        int nb_pol = 0;
+        for(Polymino poly : Liste_polyminos_utilises){
+            if (nb_pol %3 == 0){y_poly=y_poly+150;x_poly=150;}
+            BufferedImage img_poly=DrawTools.getImage(ConfigPartie.rep_image_polymino+poly.typePolymino+".png");
+            DrawTools.drawImageTransformed(fond,img_poly,x_poly,y_poly,0,100);
+            x_poly=x_poly+150;
+            nb_pol++;
+        }
+        //export des indices et du tableau vierge
+        BufferedImage img_probleme=ensembleIndices.exportGraphical();
+        BufferedImage img_zoom = DrawTools.Zoom(img_probleme,200);
+        DrawTools.drawImageTransformed(fond,img_zoom,850,850,0,100);
+        //watermark
+        DrawTools.drawText(fond,ident, 850, 1720,"Arial", Color.BLACK, 20,0);
+        DrawTools.saveFile(fond,ConfigPartie.rep_export+ident+"_PBM.png");
+        //export de la solution
+        BufferedImage fond_sol = DrawTools.getImage(ConfigPartie.img_fond);
+        BufferedImage img_tab = plateau.exportGraphical();
+        BufferedImage tab_zoom = DrawTools.Zoom(img_tab,200);
+        DrawTools.drawImageTransformed(fond_sol,tab_zoom,850,850,0,100);
+        DrawTools.drawText(fond_sol,ident, 850, 1720,"Arial", Color.BLACK, 20,0);
+        DrawTools.saveFile(fond_sol,ConfigPartie.rep_export+ident+"_SOL.png");
+    }
+    
     public void export(String numero) {
         //creation de l'identifiant
         String ident = numero+" - "+ConfigPartie.largeur_plateau+"&"+ConfigPartie.hauteur_plateau+"@";

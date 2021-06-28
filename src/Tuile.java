@@ -27,7 +27,7 @@ public class Tuile extends Case{
 
     public BufferedImage exportGraphical()
     {
-        BufferedImage img = DrawTools.getImage("image/Type" + getHauteur() + ".png");
+        BufferedImage img = DrawTools.getImage("image/" + ConfigPartie.style + "Type" + getHauteur() + ".png");
         return img;
     }
 

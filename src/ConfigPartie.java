@@ -8,6 +8,9 @@ public class ConfigPartie {
 
     private ConfigPartie(){}
     
+    //Config Style
+    public static String style = "CT"; //CT = City / DI = Diamonds / VG = Vegetables / AB = Abstract
+    
     //config pieces
     public static boolean rectoverso = true;
     public static boolean same_rectoverso = true;
@@ -25,7 +28,9 @@ public class ConfigPartie {
 
     //config souhait indice
     //TODO comme pour Minecraft rendre parametrable l'affichage des indice. Piece neutre/visible/bon sens.
-    public static int nb_pieces_placees = 2;
+    public static int nb_pieces_placees = 1;
+    public static int nb_pieces_face_connue = 1;
+    public static int nb_pieces_rotation_connue = 1;
 
     //config export graphique
     public static int taille_tuile = 100;

@@ -41,7 +41,15 @@ public class EnsembleIndices {
         Collections.shuffle(liste_polyminos_clone);
         for(int n = 0; n < ConfigPartie.nb_pieces_placees; n++)
         {
-        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n), TypeIndicePiece.EMPLACEMENT_CONNU));
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n % liste_polyminos_clone.size()), TypeIndicePiece.EMPLACEMENT_CONNU));
+        }
+        for(int n = ConfigPartie.nb_pieces_placees; n < ConfigPartie.nb_pieces_placees + ConfigPartie.nb_pieces_face_connue; n++)
+        {
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n % liste_polyminos_clone.size()), TypeIndicePiece.FACE_CONNU));
+        }
+        for(int n = ConfigPartie.nb_pieces_placees + ConfigPartie.nb_pieces_face_connue; n < ConfigPartie.nb_pieces_placees + ConfigPartie.nb_pieces_face_connue + ConfigPartie.nb_pieces_rotation_connue; n++)
+        {
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n % liste_polyminos_clone.size()), TypeIndicePiece.ROTATION_CONNU));
         }
     }
 
@@ -57,7 +65,7 @@ public class EnsembleIndices {
             //pour chaque indice il fau calculer l'ordonnee initiale  pour que ça fasse joli
             y_tmp = 70+ (ConfigPartie.hauteur_plateau-ind.list_hauteurs.size())*45;
             for (int haut : ind.list_hauteurs){
-                BufferedImage htmp = DrawTools.getImageSuperposed("image/Type" + haut + ".png", "image/carreB.png");
+                BufferedImage htmp = DrawTools.getImageSuperposed("image/" + ConfigPartie.style + "Type" + haut + ".png", "image/carreB.png");
                 DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,20);
                 y_tmp=y_tmp+45;
             }
@@ -69,7 +77,7 @@ public class EnsembleIndices {
         for(IndicePicross ind : indicePicrossListHorizontal){
             x_tmp=70+(ConfigPartie.largeur_plateau-ind.list_hauteurs.size())*45;
             for (int haut : ind.list_hauteurs){
-                BufferedImage htmp = DrawTools.getImageSuperposed("image/Type" + haut + ".png", "image/carreB.png");
+                BufferedImage htmp = DrawTools.getImageSuperposed("image/" + ConfigPartie.style + "Type" + haut + ".png", "image/carreB.png");
                 DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,20);
                 x_tmp=x_tmp+45;
             }

@@ -72,19 +72,15 @@ public class Probleme {
 		switch(contrainte)
 		{
 		case NB_PIECES_2:
-			return(2);
-		case NB_PIECES_3:
-			return(3);
-		case NB_PIECES_4:
-			return(4);
-		case NB_PIECES_5:
-			return(5);
 		case NB_PIECES_RECTO_2:
 			return(2);
+		case NB_PIECES_3:
 		case NB_PIECES_RECTO_3:
 			return(3);
+		case NB_PIECES_4:
 		case NB_PIECES_RECTO_4:
 			return(4);
+		case NB_PIECES_5:
 		case NB_PIECES_RECTO_5:
 			return(5);
 		case PIECE_PRESENTE_I:

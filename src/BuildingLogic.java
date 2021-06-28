@@ -4,7 +4,7 @@ import Enum.ContrainteLevel;
 
 public class BuildingLogic {
     public static void main(String[] args){
-        Probleme probleme =new Probleme(Arrays.asList(ContrainteLevel.NB_PIECES_3));
+        Probleme probleme =new Probleme(Arrays.asList(ContrainteLevel.NB_PIECES_5));
         probleme.export("");
         probleme.exportGraphical("G_");
     }

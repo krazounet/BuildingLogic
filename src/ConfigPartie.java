@@ -25,7 +25,9 @@ public class ConfigPartie {
 
     //config souhait indice
     //TODO comme pour Minecraft rendre parametrable l'affichage des indice. Piece neutre/visible/bon sens.
-    public static int nb_pieces_placees = 2;
+    public static int nb_pieces_placees = 1;
+    public static int nb_pieces_face_connue = 1;
+    public static int nb_pieces_rotation_connue = 2;
 
     //config export graphique
     public static int taille_tuile = 100;

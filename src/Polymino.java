@@ -103,6 +103,13 @@ public class Polymino {
         }
     }
     
+    public BufferedImage exportGraphicalCentered()
+    {
+    	BufferedImage img = new BufferedImage((1 + this.getMaxX() - this.getMinX()) * ConfigPartie.taille_tuile, (1 + this.getMaxY() - this.getMinY()) * ConfigPartie.taille_tuile, BufferedImage.TYPE_INT_ARGB);
+    	img.getGraphics().drawImage(exportGraphical(), this.getMinX() * ConfigPartie.taille_tuile * -1, this.getMinY() * ConfigPartie.taille_tuile * -1, null);
+    	return(img);
+    }
+    
     public BufferedImage exportGraphical()
     {
     	BufferedImage img = new BufferedImage((1 + this.getMaxX()) * ConfigPartie.taille_tuile, (1 + this.getMaxY()) * ConfigPartie.taille_tuile, BufferedImage.TYPE_INT_ARGB);

@@ -43,6 +43,16 @@ public class EnsembleIndices {
         {
         	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n), TypeIndicePiece.EMPLACEMENT_CONNU));
         }
+        Collections.shuffle(liste_polyminos_clone);
+        for(int n = 0; n < ConfigPartie.nb_pieces_face_connue; n++)
+        {
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n), TypeIndicePiece.FACE_CONNU));
+        }
+        Collections.shuffle(liste_polyminos_clone);
+        for(int n = 0; n < ConfigPartie.nb_pieces_rotation_connue; n++)
+        {
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n), TypeIndicePiece.ROTATION_CONNU));
+        }
     }
 
     //a retravailler dynamiquement

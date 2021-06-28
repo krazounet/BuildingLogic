@@ -153,7 +153,35 @@ public class Probleme {
         int nb_pol = 0;
         for(Polymino poly : Liste_polyminos_utilises){
             if (nb_pol %3 == 0){y_poly=y_poly+150;x_poly=150;}
-            BufferedImage img_poly=DrawTools.getImage(ConfigPartie.rep_image_polymino+poly.typePolymino+".png");
+
+            // Gestion des indices recto verso
+            String stringPolyToDraw = "";
+
+            for(IndicePiece indiceToCheck : ensembleIndices.indicePieceList)
+            {
+            	if(indiceToCheck.polymino == poly && indiceToCheck.typeIndicePiece == TypeIndicePiece.FACE_CONNU)
+            	{
+            		if(poly.recto)
+            			stringPolyToDraw = "R";
+            		else
+            			stringPolyToDraw = "V";
+            	}
+            }
+            
+            BufferedImage img_poly=DrawTools.getImage(ConfigPartie.rep_image_polymino+poly.typePolymino+stringPolyToDraw+".png");
+            
+            // Gestion des 
+            
+            for(IndicePiece indiceToCheck : ensembleIndices.indicePieceList)
+            {
+            	if(indiceToCheck.polymino == poly && indiceToCheck.typeIndicePiece == TypeIndicePiece.ROTATION_CONNU)
+            	{
+            		BufferedImage img_poly_rotated =DrawTools.getImage(ConfigPartie.rep_image_polymino + "Rotation.png");
+            		DrawTools.drawImageTransformed(img_poly_rotated, poly.exportGraphicalCentered(), img_poly.getWidth() / 2, img_poly.getHeight() / 2, 0, 25);
+            		img_poly = img_poly_rotated;
+            	}
+            }
+            
             DrawTools.drawImageTransformed(fond,DrawTools.Zoom(img_poly, 150),x_poly,y_poly,0,100);
             x_poly=x_poly+150;
             nb_pol++;

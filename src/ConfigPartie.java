@@ -10,7 +10,9 @@ public class ConfigPartie {
     
     //config pieces
     public static boolean rectoverso = true;
+    public static boolean same_rectoverso = true;
     public static boolean remove_doublon = true;
+    public static int modele_repartition = 2;
 
     //config du plateau
     public static int largeur_plateau = 5;
@@ -23,12 +25,13 @@ public class ConfigPartie {
 
     //config souhait indice
     //TODO comme pour Minecraft rendre parametrable l'affichage des indice. Piece neutre/visible/bon sens.
+    public static int nb_pieces_placees = 2;
 
     //config export graphique
     public static int taille_tuile = 100;
     public static int epaisseur_bord = 6;
     public static Color color_bordure_recto = Color.BLACK;
-    public static Color color_bordure_verso = Color.GREEN;
+    public static Color color_bordure_verso = new Color(0, 138, 255);
     public static String rep_image="image/";
     public static String rep_image_polymino ="image/Polymino/";
     public static String rep_image_bordures ="image/bordures/";

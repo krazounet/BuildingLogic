@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import Enum.*;
 
@@ -8,8 +9,9 @@ public class EnsembleIndices {
     List<IndicePicross> indicePicrossListVertical;
     List<IndicePicross> indicePicrossListHorizontal;
     List<IndiceCase> indiceCaseList;
+    List<IndicePiece> indicePieceList;
 
-    public EnsembleIndices(Plateau plateau) {
+    public EnsembleIndices(Plateau plateau, List <Polymino> liste_polyminos_utilises) {
 
         indicePicrossListVertical=new ArrayList<>();
         indicePicrossListHorizontal=new ArrayList<>();
@@ -30,6 +32,16 @@ public class EnsembleIndices {
                     indicePicrossListHorizontal.get(case_tmp.coordonnee.y).list_hauteurs.add(tuile_tmp.getHauteur());
                 }
             }
+        }
+        
+        //Création des indices sur les pièces
+        indicePieceList=new ArrayList<>();
+        List <Polymino> liste_polyminos_clone = new ArrayList<>();
+        liste_polyminos_clone.addAll(liste_polyminos_utilises);
+        Collections.shuffle(liste_polyminos_clone);
+        for(int n = 0; n < ConfigPartie.nb_pieces_placees; n++)
+        {
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n), TypeIndicePiece.EMPLACEMENT_CONNU));
         }
     }
 
@@ -72,6 +84,23 @@ public class EnsembleIndices {
             for (int ord=0; ord < ConfigPartie.hauteur_plateau; ord++){
                 DrawTools.drawImageCenter(img_pbm,img_case_vide,x_tmp+(abs*100),y_tmp+(ord*100));
             }
+        }
+        
+        //Indices pièce
+        for(IndicePiece indiceToDraw : indicePieceList)
+        {
+        	switch(indiceToDraw.typeIndicePiece)
+        	{
+        	case EMPLACEMENT_CONNU:
+        		img_pbm.getGraphics().drawImage(indiceToDraw.polymino.exportGraphical(),x_tmp - 50,y_tmp - 50, null);
+        		break;
+        	case FACE_CONNU:
+        		// A coder
+        		break;
+        	case ROTATION_CONNU:
+        		// A coder
+        		break;
+        	}
         }
     return img_pbm;
     }

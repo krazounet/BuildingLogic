@@ -23,7 +23,7 @@ public class Probleme {
         placementPieces();
 
         //Creation des indices
-        ensembleIndices =new EnsembleIndices(plateau);
+        ensembleIndices =new EnsembleIndices(plateau, Liste_polyminos_utilises);
     	} while(!areAllContraintesOK(contraintesList));
 
     }
@@ -154,7 +154,7 @@ public class Probleme {
         for(Polymino poly : Liste_polyminos_utilises){
             if (nb_pol %3 == 0){y_poly=y_poly+150;x_poly=150;}
             BufferedImage img_poly=DrawTools.getImage(ConfigPartie.rep_image_polymino+poly.typePolymino+".png");
-            DrawTools.drawImageTransformed(fond,img_poly,x_poly,y_poly,0,100);
+            DrawTools.drawImageTransformed(fond,DrawTools.Zoom(img_poly, 150),x_poly,y_poly,0,100);
             x_poly=x_poly+150;
             nb_pol++;
         }

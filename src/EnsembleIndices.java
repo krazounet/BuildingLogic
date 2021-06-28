@@ -56,38 +56,42 @@ public class EnsembleIndices {
     //a retravailler dynamiquement
     public BufferedImage exportGraphical()
     {
+    	int tailleIndice = 40;
+    	int decalageIndice = 15;
+    	int startXTableau = (ConfigPartie.largeur_plateau*ConfigPartie.taille_tuile/2)+75;
+    	int startYTableau = (ConfigPartie.hauteur_plateau*ConfigPartie.taille_tuile/2)+75;
         //declaration de la taille de l'image.
         BufferedImage img_pbm = new BufferedImage((ConfigPartie.largeur_plateau*150)+100,(ConfigPartie.hauteur_plateau*150)+100,BufferedImage.TYPE_INT_ARGB);
         //Indicevretical
-        int x_tmp=(ConfigPartie.largeur_plateau*50)+75;//calcul : espace pour les indices horizontal (largeur*50))
+        int x_tmp=startXTableau;//calcul : espace pour les indices horizontal (largeur*50))
         int y_tmp;
         for(IndicePicross ind : indicePicrossListVertical){
             //pour chaque indice il fau calculer l'ordonnee initiale  pour que ça fasse joli
-            y_tmp = 70+ (ConfigPartie.hauteur_plateau-ind.list_hauteurs.size())*45;
+            y_tmp = startYTableau - ConfigPartie.taille_tuile / 2 - ind.list_hauteurs.size() * tailleIndice + decalageIndice;
             for (int haut : ind.list_hauteurs){
                 BufferedImage htmp = DrawTools.getImageSuperposed("image/" + ConfigPartie.style + "Type" + haut + ".png", "image/carreB.png");
-                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,20);
-                y_tmp=y_tmp+45;
+                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,18);
+                y_tmp=y_tmp+tailleIndice;
             }
             x_tmp=x_tmp+ConfigPartie.taille_tuile;
         }
         //indice horizontal
 
-        y_tmp=(ConfigPartie.hauteur_plateau*50)+75;
+        y_tmp=startYTableau;
         for(IndicePicross ind : indicePicrossListHorizontal){
-            x_tmp=70+(ConfigPartie.largeur_plateau-ind.list_hauteurs.size())*45;
+            x_tmp=startXTableau - ConfigPartie.taille_tuile / 2 - ind.list_hauteurs.size() * tailleIndice + decalageIndice;
             for (int haut : ind.list_hauteurs){
                 BufferedImage htmp = DrawTools.getImageSuperposed("image/" + ConfigPartie.style + "Type" + haut + ".png", "image/carreB.png");
-                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,20);
-                x_tmp=x_tmp+45;
+                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,18);
+                x_tmp=x_tmp+tailleIndice;
             }
 
             y_tmp=y_tmp+ConfigPartie.taille_tuile;
         }
         //plateau vierge
         BufferedImage img_case_vide = DrawTools.getImage(ConfigPartie.img_case);
-        x_tmp=(ConfigPartie.largeur_plateau*50)+75;
-        y_tmp=(ConfigPartie.hauteur_plateau*50)+75;
+        x_tmp=startXTableau;
+        y_tmp=startYTableau;
         for (int abs=0; abs < ConfigPartie.largeur_plateau; abs++){
             for (int ord=0; ord < ConfigPartie.hauteur_plateau; ord++){
                 DrawTools.drawImageCenter(img_pbm,img_case_vide,x_tmp+(abs*100),y_tmp+(ord*100));

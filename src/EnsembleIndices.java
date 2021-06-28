@@ -41,17 +41,15 @@ public class EnsembleIndices {
         Collections.shuffle(liste_polyminos_clone);
         for(int n = 0; n < ConfigPartie.nb_pieces_placees; n++)
         {
-        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n), TypeIndicePiece.EMPLACEMENT_CONNU));
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n % liste_polyminos_clone.size()), TypeIndicePiece.EMPLACEMENT_CONNU));
         }
-        Collections.shuffle(liste_polyminos_clone);
-        for(int n = 0; n < ConfigPartie.nb_pieces_face_connue; n++)
+        for(int n = ConfigPartie.nb_pieces_placees; n < ConfigPartie.nb_pieces_placees + ConfigPartie.nb_pieces_face_connue; n++)
         {
-        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n), TypeIndicePiece.FACE_CONNU));
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n % liste_polyminos_clone.size()), TypeIndicePiece.FACE_CONNU));
         }
-        Collections.shuffle(liste_polyminos_clone);
-        for(int n = 0; n < ConfigPartie.nb_pieces_rotation_connue; n++)
+        for(int n = ConfigPartie.nb_pieces_placees + ConfigPartie.nb_pieces_face_connue; n < ConfigPartie.nb_pieces_placees + ConfigPartie.nb_pieces_face_connue + ConfigPartie.nb_pieces_rotation_connue; n++)
         {
-        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n), TypeIndicePiece.ROTATION_CONNU));
+        	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n % liste_polyminos_clone.size()), TypeIndicePiece.ROTATION_CONNU));
         }
     }
 

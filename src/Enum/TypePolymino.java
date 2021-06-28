@@ -5,5 +5,5 @@ public enum TypePolymino {
     O,//carré
     T,//le t
     L,
-    S,
+    S
 }

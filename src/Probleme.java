@@ -10,7 +10,9 @@ public class Probleme {
     List <Polymino> Liste_polyminos_utilises;
     EnsembleIndices ensembleIndices;
 
-    public Probleme() {
+    public Probleme(List<ContrainteLevel> contraintesList) {
+    	do
+    	{
         //generation plateau
         plateau = new Plateau();
 
@@ -22,7 +24,81 @@ public class Probleme {
 
         //Creation des indices
         ensembleIndices =new EnsembleIndices(plateau);
+    	} while(!areAllContraintesOK(contraintesList));
 
+    }
+    
+    private boolean areAllContraintesOK(List<ContrainteLevel> contraintesList)
+    {
+    	for(ContrainteLevel contrainteLevel : contraintesList)
+    	{
+    		switch(contrainteLevel)
+    		{
+    		case NB_PIECES_2:
+    		case NB_PIECES_3:
+    		case NB_PIECES_4:
+    		case NB_PIECES_5:
+    			if(Liste_polyminos_utilises.size() != (int)returnValueOfContrainte(contrainteLevel))
+    				return(false);
+    			break;
+    		case NB_PIECES_RECTO_2:
+    		case NB_PIECES_RECTO_3:
+    		case NB_PIECES_RECTO_4:
+    		case NB_PIECES_RECTO_5:
+    			int nbRecto = 0;
+    			for(Polymino polyminoToTest : Liste_polyminos_utilises)
+    				if(polyminoToTest.recto)
+    					nbRecto++;
+    			if(nbRecto != (int)returnValueOfContrainte(contrainteLevel))
+    				return(false);
+    			break;
+    		case PIECE_PRESENTE_I:
+    		case PIECE_PRESENTE_O:
+    		case PIECE_PRESENTE_T:
+    		case PIECE_PRESENTE_L:
+    		case PIECE_PRESENTE_S:
+    			for(Polymino polyminoToTest : Liste_polyminos_utilises)
+    				if(polyminoToTest.typePolymino == (TypePolymino)returnValueOfContrainte(contrainteLevel))
+    					return(true);
+				return(false);
+    		}
+    	}
+    	
+    	return(true);
+    }
+
+    private Object returnValueOfContrainte(ContrainteLevel contrainte)
+    {
+		switch(contrainte)
+		{
+		case NB_PIECES_2:
+			return(2);
+		case NB_PIECES_3:
+			return(3);
+		case NB_PIECES_4:
+			return(4);
+		case NB_PIECES_5:
+			return(5);
+		case NB_PIECES_RECTO_2:
+			return(2);
+		case NB_PIECES_RECTO_3:
+			return(3);
+		case NB_PIECES_RECTO_4:
+			return(4);
+		case NB_PIECES_RECTO_5:
+			return(5);
+		case PIECE_PRESENTE_I:
+			return(TypePolymino.I);
+		case PIECE_PRESENTE_O:
+			return(TypePolymino.O);
+		case PIECE_PRESENTE_T:
+			return(TypePolymino.T);
+		case PIECE_PRESENTE_L:
+			return(TypePolymino.L);
+		case PIECE_PRESENTE_S:
+			return(TypePolymino.S);
+		}
+		return(null);
     }
 
     private void placementPieces() {

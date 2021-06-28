@@ -16,7 +16,7 @@ public class Probleme {
 
         //init des Pieces qui seront placees
         Liste_polyminos_utilises =new ArrayList<>();
-
+        
         //placement Pieces
         placementPieces();
 
@@ -95,7 +95,7 @@ public class Probleme {
         DrawTools.saveFile(fond,ConfigPartie.rep_export+ident+"_PBM.png");
         //export de la solution
         BufferedImage fond_sol = DrawTools.getImage(ConfigPartie.img_fond);
-        BufferedImage img_tab = plateau.exportGraphical();
+        BufferedImage img_tab = plateau.exportGraphical(Liste_polyminos_utilises);
         BufferedImage tab_zoom = DrawTools.Zoom(img_tab,200);
         DrawTools.drawImageTransformed(fond_sol,tab_zoom,850,850,0,100);
         DrawTools.drawText(fond_sol,ident, 850, 1720,"Arial", Color.BLACK, 20,0);

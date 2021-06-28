@@ -79,6 +79,29 @@ public class DrawTools
         return(imageToReturn);
     }
 
+    public static BufferedImage getImageSuperposed(String filename1, String filename2)
+    {
+        BufferedImage imageToReturn = null;
+        BufferedImage imageToSuperpose = null;
+
+        try
+        {
+            File imageF = new File(filename1);
+            imageToReturn = ImageIO.read(imageF);
+            imageF = new File(filename2);
+            imageToSuperpose = ImageIO.read(imageF);
+        }
+        catch(IOException x)
+        {
+            x.printStackTrace();
+            ConfigPartie.LOGGER.log(Level.SEVERE, x.toString(), x);
+        }
+        
+        imageToReturn.getGraphics().drawImage(imageToSuperpose, 0, 0, null);
+        
+        return(imageToReturn);
+    }
+
     public static void saveFile(BufferedImage imageToSave, String filename)
     {
         File f = new File(filename);

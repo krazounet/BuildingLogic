@@ -105,7 +105,7 @@ public class Polymino {
     
     public BufferedImage exportGraphical()
     {
-    	BufferedImage img = new BufferedImage((1 + this.getMaxX() - this.getMinX()) * ConfigPartie.taille_tuile, (1 + this.getMaxY() - this.getMinY()) * ConfigPartie.taille_tuile, BufferedImage.TYPE_INT_ARGB);
+    	BufferedImage img = new BufferedImage((1 + this.getMaxX()) * ConfigPartie.taille_tuile, (1 + this.getMaxY()) * ConfigPartie.taille_tuile, BufferedImage.TYPE_INT_ARGB);
     	for(Tuile tuile : tuileList)
     	{
     		DrawTools.drawImageTransformed(img, tuile.exportGraphical(), (ConfigPartie.taille_tuile / 2) + (tuile.coordonnee.x * ConfigPartie.taille_tuile), (ConfigPartie.taille_tuile / 2) + (tuile.coordonnee.y * ConfigPartie.taille_tuile), 0, 50);

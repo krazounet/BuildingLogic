@@ -64,12 +64,20 @@ public class Plateau {
 
     }
 
-    public BufferedImage exportGraphical(){
+    public BufferedImage exportGraphical(List <Polymino> Liste_polyminos_utilises){
         BufferedImage img= new BufferedImage(ConfigPartie.largeur_plateau*ConfigPartie.taille_tuile,ConfigPartie.hauteur_plateau*ConfigPartie.taille_tuile,BufferedImage.TYPE_INT_ARGB);
+        BufferedImage caseVide = DrawTools.getImage("image/carreB.png");
         for (int x=0; x<ConfigPartie.largeur_plateau; x++){
             for (int y=0; y<ConfigPartie.hauteur_plateau; y++) {
-                DrawTools.drawImageTransformed(img,tableau[x][y].exportGraphical(),ConfigPartie.taille_tuile/2+(x*ConfigPartie.taille_tuile),ConfigPartie.taille_tuile/2+(y*ConfigPartie.taille_tuile), 0, 50);
+                DrawTools.drawImageTransformed(img,caseVide,ConfigPartie.taille_tuile/2+(x*ConfigPartie.taille_tuile),ConfigPartie.taille_tuile/2+(y*ConfigPartie.taille_tuile), 0, 50);
             }
+        }
+        
+        for(int p = 0; p < Liste_polyminos_utilises.size(); p++)
+        {
+        	Polymino polyminoToDraw = Liste_polyminos_utilises.get(p);
+        	
+            img.getGraphics().drawImage(polyminoToDraw.exportGraphical(),0,0, null);
         }
         return img;
     }

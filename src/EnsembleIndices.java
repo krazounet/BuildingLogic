@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class EnsembleIndices {
             //pour chaque indice il fau calculer l'ordonnee initiale  pour que ça fasse joli
             y_tmp = 70+ (ConfigPartie.hauteur_plateau-ind.list_hauteurs.size())*45;
             for (int haut : ind.list_hauteurs){
-                BufferedImage htmp = DrawTools.getImage("image/Type" + haut + "P.png");
+                BufferedImage htmp = DrawTools.getImageSuperposed("image/Type" + haut + ".png", "image/carreB.png");
                 DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,20);
                 y_tmp=y_tmp+45;
             }
@@ -56,7 +57,7 @@ public class EnsembleIndices {
         for(IndicePicross ind : indicePicrossListHorizontal){
             x_tmp=70+(ConfigPartie.largeur_plateau-ind.list_hauteurs.size())*45;
             for (int haut : ind.list_hauteurs){
-                BufferedImage htmp = DrawTools.getImage("image/Type" + haut + "P.png");
+                BufferedImage htmp = DrawTools.getImageSuperposed("image/Type" + haut + ".png", "image/carreB.png");
                 DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,20);
                 x_tmp=x_tmp+45;
             }

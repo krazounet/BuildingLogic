@@ -8,6 +8,9 @@ public class ConfigPartie {
 
     private ConfigPartie(){}
     
+    //Config Style
+    public static String style = "CT"; //CT = City / DI = Diamonds / VG = Vegetables / AB = Abstract
+    
     //config pieces
     public static boolean rectoverso = true;
     public static boolean same_rectoverso = true;

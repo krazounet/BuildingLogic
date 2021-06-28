@@ -38,7 +38,8 @@ public class Probleme {
     		case NB_PIECES_3:
     		case NB_PIECES_4:
     		case NB_PIECES_5:
-    			if(Liste_polyminos_utilises.size() != (int)returnValueOfContrainte(contrainteLevel))
+    		    case NB_PIECES_6 :
+    			if(Liste_polyminos_utilises.size() != contrainteLevel.value)
     				return(false);
     			break;
     		case NB_PIECES_RECTO_2:
@@ -49,7 +50,7 @@ public class Probleme {
     			for(Polymino polyminoToTest : Liste_polyminos_utilises)
     				if(polyminoToTest.recto)
     					nbRecto++;
-    			if(nbRecto != (int)returnValueOfContrainte(contrainteLevel))
+    			if(nbRecto != contrainteLevel.value)
     				return(false);
     			break;
     		case PIECE_PRESENTE_I:
@@ -58,7 +59,7 @@ public class Probleme {
     		case PIECE_PRESENTE_L:
     		case PIECE_PRESENTE_S:
     			for(Polymino polyminoToTest : Liste_polyminos_utilises)
-    				if(polyminoToTest.typePolymino == (TypePolymino)returnValueOfContrainte(contrainteLevel))
+    				if(polyminoToTest.typePolymino == contrainteLevel.typePolymino)
     					return(true);
 				return(false);
     		}
@@ -66,7 +67,7 @@ public class Probleme {
     	
     	return(true);
     }
-
+/*
     private Object returnValueOfContrainte(ContrainteLevel contrainte)
     {
 		switch(contrainte)
@@ -83,6 +84,8 @@ public class Probleme {
 		case NB_PIECES_5:
 		case NB_PIECES_RECTO_5:
 			return(5);
+            case NB_PIECES_6:
+                return 6;
 		case PIECE_PRESENTE_I:
 			return(TypePolymino.I);
 		case PIECE_PRESENTE_O:
@@ -96,7 +99,7 @@ public class Probleme {
 		}
 		return(null);
     }
-
+*/
     private void placementPieces() {
         //ici boucle pour essayer de placer des pieces
         int nb_essai=0;

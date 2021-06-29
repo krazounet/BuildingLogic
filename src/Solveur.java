@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +45,27 @@ public class Solveur
 			getNbItem = SolveurTypePossible.getNbItem(tableauTypePossible);
 		} while(oldGetNbItem != getNbItem);
 		
+		exportGraphical(tableauTypePossible);
 		System.out.println("NBItems : " + getNbItem);
+	}
+	
+	private void exportGraphical(SolveurTypePossible[][] tableauTypePossible)
+	{
+		BufferedImage tableau = new BufferedImage(ConfigPartie.largeur_plateau * 200, ConfigPartie.largeur_plateau * 200, BufferedImage.TYPE_INT_ARGB);
+		List<SolveurTypePossible.TypeCase> orderType = Arrays.asList(SolveurTypePossible.TypeCase.VIDE, SolveurTypePossible.TypeCase.TYPE1, SolveurTypePossible.TypeCase.TYPE2, SolveurTypePossible.TypeCase.TYPE3);
+		List<BufferedImage> imageType = Arrays.asList(DrawTools.getImage("image/SolveurImgVide.png"), DrawTools.getImage("image/" + ConfigPartie.style + "Type1.png"), DrawTools.getImage("image/" + ConfigPartie.style + "Type2.png"), DrawTools.getImage("image/" + ConfigPartie.style + "Type3.png"), DrawTools.getImage("image/SolveurImgUnknow.png"));
+		
+		for(int x = 0; x < ConfigPartie.largeur_plateau; x++)
+		{
+			for(int y = 0; y < ConfigPartie.hauteur_plateau; y++)
+			{
+				BufferedImage imageToDraw = imageType.get(4);
+				if(tableauTypePossible[x][y].typePossibleList.size() == 1)
+					imageToDraw = imageType.get(orderType.indexOf(tableauTypePossible[x][y].typePossibleList.get(0)));
+				DrawTools.drawImageCenter(tableau, imageToDraw, x * 200 + 100, y * 200 + 100);
+			}
+		}
+		DrawTools.saveFile(tableau, "Export/Solveur.png");
 	}
 	
 	private SolveurTypePossible getSolveurTypePossibleFromIndicePicross(int x, int y, SolveurTypePossible[][] tableauTypePossible)

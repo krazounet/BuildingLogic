@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class SolveurTypePossible
@@ -9,6 +10,8 @@ public class SolveurTypePossible
 		TYPE2,
 		TYPE3
 	}
+
+	public static List<TypeCase> orderType = Arrays.asList(TypeCase.VIDE, TypeCase.TYPE1, TypeCase.TYPE2, TypeCase.TYPE3);
 
 	public List<TypeCase> typePossibleList;
 	

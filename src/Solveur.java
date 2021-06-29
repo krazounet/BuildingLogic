@@ -6,23 +6,22 @@ import java.util.List;
 public class Solveur
 {
 	Probleme probleme;
+	SolveurTypePossible[][] tableauTypePossible;
 	
 	public Solveur(Probleme probleme)
 	{
 		this.probleme = probleme;
+		tableauTypePossible = new SolveurTypePossible[ConfigPartie.largeur_plateau][ConfigPartie.hauteur_plateau];
 	}
 	
-	public void analyse()
+	public int analyse(boolean export)
 	{
-		SolveurTypePossible[][] tableauTypePossible = new SolveurTypePossible[ConfigPartie.largeur_plateau][ConfigPartie.hauteur_plateau];
 		
-		List<SolveurTypePossible.TypeCase> orderType = Arrays.asList(SolveurTypePossible.TypeCase.VIDE, SolveurTypePossible.TypeCase.TYPE1, SolveurTypePossible.TypeCase.TYPE2, SolveurTypePossible.TypeCase.TYPE3);
-
 		for(int x = 0; x < ConfigPartie.largeur_plateau; x++)
 		{
 			for(int y = 0; y < ConfigPartie.hauteur_plateau; y++)
 			{
-				SolveurTypePossible solveurTypePossible = new SolveurTypePossible(orderType);
+				SolveurTypePossible solveurTypePossible = new SolveurTypePossible(SolveurTypePossible.orderType);
 				tableauTypePossible[x][y] = solveurTypePossible;
 			}
 		}
@@ -38,21 +37,31 @@ public class Solveur
 			{
 				for(int y = 0; y < ConfigPartie.hauteur_plateau; y++)
 				{
-					SolveurTypePossible solveurTypePossible = getSolveurTypePossibleFromIndicePicross(x, y, tableauTypePossible);
+					SolveurTypePossible solveurTypePossible = getSolveurTypePossibleFromIndicePicross(x, y);
 					tableauTypePossible[x][y] = solveurTypePossible;
 				}
 			}
 			getNbItem = SolveurTypePossible.getNbItem(tableauTypePossible);
 		} while(oldGetNbItem != getNbItem);
 		
-		exportGraphical(tableauTypePossible);
-		System.out.println("NBItems : " + getNbItem);
+		if(export)
+			exportGraphical();
+		
+		List<Piece> listPieces = Probleme.getListPiece();
+		SolveurCoordonneesPossible coordPossible = new SolveurCoordonneesPossible(probleme, listPieces, tableauTypePossible);
+		coordPossible.update();
+/*		for(SolveurPiece piece : coordPossible.listPieces)
+		{
+			System.out.println("Nombre de positions possibles : " + piece.getNbPositionsPossible());
+		}*/
+		
+		int nbSolutions = coordPossible.tryToSolve(export);
+		return(nbSolutions);
 	}
 	
-	private void exportGraphical(SolveurTypePossible[][] tableauTypePossible)
+	private void exportGraphical()
 	{
 		BufferedImage tableau = new BufferedImage(ConfigPartie.largeur_plateau * 200, ConfigPartie.largeur_plateau * 200, BufferedImage.TYPE_INT_ARGB);
-		List<SolveurTypePossible.TypeCase> orderType = Arrays.asList(SolveurTypePossible.TypeCase.VIDE, SolveurTypePossible.TypeCase.TYPE1, SolveurTypePossible.TypeCase.TYPE2, SolveurTypePossible.TypeCase.TYPE3);
 		List<BufferedImage> imageType = Arrays.asList(DrawTools.getImage("image/SolveurImgVide.png"), DrawTools.getImage("image/" + ConfigPartie.style + "Type1.png"), DrawTools.getImage("image/" + ConfigPartie.style + "Type2.png"), DrawTools.getImage("image/" + ConfigPartie.style + "Type3.png"), DrawTools.getImage("image/SolveurImgUnknow.png"));
 		
 		for(int x = 0; x < ConfigPartie.largeur_plateau; x++)
@@ -61,17 +70,16 @@ public class Solveur
 			{
 				BufferedImage imageToDraw = imageType.get(4);
 				if(tableauTypePossible[x][y].typePossibleList.size() == 1)
-					imageToDraw = imageType.get(orderType.indexOf(tableauTypePossible[x][y].typePossibleList.get(0)));
+					imageToDraw = imageType.get(SolveurTypePossible.orderType.indexOf(tableauTypePossible[x][y].typePossibleList.get(0)));
 				DrawTools.drawImageCenter(tableau, imageToDraw, x * 200 + 100, y * 200 + 100);
 			}
 		}
 		DrawTools.saveFile(tableau, "Export/Solveur.png");
 	}
 	
-	private SolveurTypePossible getSolveurTypePossibleFromIndicePicross(int x, int y, SolveurTypePossible[][] tableauTypePossible)
+	private SolveurTypePossible getSolveurTypePossibleFromIndicePicross(int x, int y)
 	{
 		List<SolveurTypePossible.TypeCase> typePossibleList = new ArrayList<>();
-		List<SolveurTypePossible.TypeCase> orderType = Arrays.asList(SolveurTypePossible.TypeCase.VIDE, SolveurTypePossible.TypeCase.TYPE1, SolveurTypePossible.TypeCase.TYPE2, SolveurTypePossible.TypeCase.TYPE3);
 
 		int nbIndicesVert = probleme.ensembleIndices.indicePicrossListVertical.get(x).list_hauteurs.size();
 		int nbIndicesHoriz = probleme.ensembleIndices.indicePicrossListHorizontal.get(y).list_hauteurs.size();
@@ -85,7 +93,7 @@ public class Solveur
 			// Calcul des possibilités pour la colone
 			List<SolveurTypePossible.TypeCase> typePossibleInOrder = new ArrayList<>();
 			for(Integer hauteur : probleme.ensembleIndices.indicePicrossListVertical.get(x).list_hauteurs)
-				typePossibleInOrder.add(orderType.get(hauteur));
+				typePossibleInOrder.add(SolveurTypePossible.orderType.get(hauteur));
 	
 			List<SolveurTypePossible> listPossiblesConnus = new ArrayList<>();
 			for(int yy = 0; yy < ConfigPartie.hauteur_plateau; yy++)
@@ -95,7 +103,7 @@ public class Solveur
 			// Calcul des possibilités pour la ligne
 			typePossibleInOrder = new ArrayList<>();
 			for(Integer hauteur : probleme.ensembleIndices.indicePicrossListHorizontal.get(y).list_hauteurs)
-				typePossibleInOrder.add(orderType.get(hauteur));
+				typePossibleInOrder.add(SolveurTypePossible.orderType.get(hauteur));
 	
 			listPossiblesConnus = new ArrayList<>();
 			for(int xx = 0; xx < ConfigPartie.largeur_plateau; xx++)

@@ -18,8 +18,8 @@ public class ConfigPartie {
     public static int modele_repartition = 1;
 
     //config du plateau
-    public static int largeur_plateau = 6;
-    public static int hauteur_plateau = 6;
+    public static int largeur_plateau = 5;
+    public static int hauteur_plateau = 5;
 
     //config algo placement piece
     public static int nb_essai_max = 100000;

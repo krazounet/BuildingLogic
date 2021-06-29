@@ -7,6 +7,8 @@ public enum ContrainteLevel
 	NB_PIECES_4(4),
 	NB_PIECES_5(5),
 	NB_PIECES_6(6),
+	NB_PIECES_7(7),
+	NB_PIECES_8(8),
 	NB_PIECES_RECTO_2(2),
 	NB_PIECES_RECTO_3(3),
 	NB_PIECES_RECTO_4(4),

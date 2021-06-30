@@ -10,7 +10,7 @@ public class SolveurPiece
 		listPolymino = new ArrayList<>();
 		for(Polymino polymino : piece.polyminoList)
 		{
-			listPolymino.add(new SolveurPolymino(polymino.tuileList));
+			listPolymino.add(new SolveurPolymino(polymino.tuileList, polymino.typePolymino, polymino.orientation, polymino.recto));
 		}
 	}
 	

@@ -19,6 +19,43 @@ public class SolveurCoordonneesPossible
 		{
 			this.listPieces.add(new SolveurPiece(pieceToConvert));
 		}
+		
+		// On supprimme les polyminos interdit par les indices
+		for(SolveurPiece piece : this.listPieces)
+		{
+			for(int idPolymino = 0; idPolymino < piece.listPolymino.size(); idPolymino++)
+			{
+				SolveurPolymino polymino = piece.listPolymino.get(idPolymino);
+				for(IndicePiece indicePiece : probleme.ensembleIndices.indicePieceList)
+				{
+					if(indicePiece.polymino.typePolymino == polymino.typePolymino)
+					{
+						switch(indicePiece.typeIndicePiece)
+						{
+						case FACE_CONNU:
+							if(indicePiece.polymino.recto != polymino.recto)
+							{
+								piece.listPolymino.remove(idPolymino);
+								idPolymino--;
+								continue;
+							}
+							break;
+						case EMPLACEMENT_CONNU:
+							// Il faudra placer cette pièce en plus
+						case ROTATION_CONNU:
+							if(indicePiece.polymino.recto != polymino.recto || indicePiece.polymino.orientation != polymino.orientation)
+							{
+								piece.listPolymino.remove(idPolymino);
+								idPolymino--;
+								continue;
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+		
 		this.tableauTypePossible = tableauTypePossible;
 	}
 	
@@ -34,6 +71,18 @@ public class SolveurCoordonneesPossible
 					{
 						if(isPolyminoPlacable(polymino, x, y))
 						{
+							for(IndicePiece indicePiece : probleme.ensembleIndices.indicePieceList)
+							{
+								if(indicePiece.polymino.typePolymino == polymino.typePolymino)
+								{
+									switch(indicePiece.typeIndicePiece)
+									{
+									case EMPLACEMENT_CONNU:
+										if(indicePiece.polymino.getMinX() != x || indicePiece.polymino.getMinY() != y)
+											continue;
+									}
+								}
+							}
 							polymino.listCoordonneesPossible.add(new Point(x, y));
 						}
 					}

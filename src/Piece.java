@@ -24,7 +24,7 @@ public class Piece {
         {
         case 1:
 			switch (typePolymino) {
-				case I -> {
+				case I4 -> {
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(0, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(3, 2), new Coordonnee(0, 1), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(0, 2), true));
@@ -58,7 +58,7 @@ public class Piece {
 			break;
         case 2:
 			switch (typePolymino) {
-				case I -> {
+				case I4 -> {
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(0, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(3, 2), new Coordonnee(0, 1), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(0, 2), true));
@@ -87,6 +87,66 @@ public class Piece {
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(1, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(1, 2), new Coordonnee(1, 1), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(2, 0), true));
+				}
+			}
+			break;
+        case 3:
+			switch (typePolymino) {
+				case I4 -> {
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(0, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 2), true));
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(0, 3), true));
+				}
+				case I3 -> {
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(0, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 2), true));
+				}
+				case I2 -> {
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(0, 1), true));
+				}
+				case J -> {
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(1, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(0, 2), true));
+				}
+				case L -> {
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(1, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(1, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(1, 2), true));
+				}
+				case O -> {
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(1, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(1, 1), true));
+				}
+				case Z -> {
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(1, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(1, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(2, 1), true));
+				}
+				case S -> {
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(0, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(1, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(1, 2), true));
+				}
+				case T -> {
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(1, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(1, 0), new Coordonnee(1, 1), true));
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(2, 0), true));
+				}
+				case V -> {
+					tuileList.add(new Tuile(new HauteurTuile(2, 0), new Coordonnee(0, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(1, 0), true));
+					tuileList.add(new Tuile(new HauteurTuile(3, 0), new Coordonnee(0, 1), true));
 				}
 			}
 			break;

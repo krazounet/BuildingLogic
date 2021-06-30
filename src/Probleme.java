@@ -34,20 +34,30 @@ public class Probleme {
     	{
     		switch(contrainteLevel)
     		{
+    		case NB_PIECES_1:
     		case NB_PIECES_2:
     		case NB_PIECES_3:
     		case NB_PIECES_4:
     		case NB_PIECES_5:
-    		case NB_PIECES_6 :
-                case NB_PIECES_7 :
-                case NB_PIECES_8 :
+    		case NB_PIECES_6:
+            case NB_PIECES_7:
+            case NB_PIECES_8:
+            case NB_PIECES_9:
+            case NB_PIECES_10:
     			if(Liste_polyminos_utilises.size() != contrainteLevel.value)
     				return(false);
     			break;
+    		case NB_PIECES_RECTO_0:
+    		case NB_PIECES_RECTO_1:
     		case NB_PIECES_RECTO_2:
     		case NB_PIECES_RECTO_3:
     		case NB_PIECES_RECTO_4:
     		case NB_PIECES_RECTO_5:
+    		case NB_PIECES_RECTO_6:
+    		case NB_PIECES_RECTO_7:
+    		case NB_PIECES_RECTO_8:
+    		case NB_PIECES_RECTO_9:
+    		case NB_PIECES_RECTO_10:
     			int nbRecto = 0;
     			for(Polymino polyminoToTest : Liste_polyminos_utilises)
     				if(polyminoToTest.recto)
@@ -55,15 +65,22 @@ public class Probleme {
     			if(nbRecto != contrainteLevel.value)
     				return(false);
     			break;
-    		case PIECE_PRESENTE_I:
+    		case PIECE_PRESENTE_I4:
+    		case PIECE_PRESENTE_I3:
+    		case PIECE_PRESENTE_I2:
     		case PIECE_PRESENTE_O:
     		case PIECE_PRESENTE_T:
     		case PIECE_PRESENTE_L:
+    		case PIECE_PRESENTE_J:
     		case PIECE_PRESENTE_S:
+    		case PIECE_PRESENTE_Z:
+    		case PIECE_PRESENTE_V:
+    			boolean pieceIci = false;
     			for(Polymino polyminoToTest : Liste_polyminos_utilises)
     				if(polyminoToTest.typePolymino == contrainteLevel.typePolymino)
-    					return(true);
-				return(false);
+    					pieceIci = true;
+    			if(!pieceIci)
+    				return(false);
     		}
     	}
     	
@@ -93,6 +110,8 @@ public class Probleme {
                 //reinitilise le test
                 nb_essai=0;
             }
+            if(Liste_polyminos_utilises.size() >= ConfigPartie.nb_pieces_max)
+            	return;
             nb_essai++;
         }
     }
@@ -100,13 +119,24 @@ public class Probleme {
     public static List<Piece> getListPiece() {
         //chaque polymino est ajoute autant de fois que nécessaire.
         List <Piece> list_a_retourner=new ArrayList<>();
-        for (TypePolymino tp : TypePolymino.values()){
+        for (TypePolymino tp : ConfigPartie.listPolyminoToUse){
             for (int nb_fois=0; nb_fois<ConfigPartie.nb_chaque_piece;nb_fois++){
                 list_a_retourner.add(new Piece(tp));
             }
 
         }
 
+
+        return list_a_retourner;
+    }
+
+    public static List<Piece> getListPieceFromList(List <Polymino> Liste_polyminos) {
+        //chaque polymino est ajoute autant de fois que nécessaire.
+        List <Piece> list_a_retourner=new ArrayList<>();
+        for(Polymino polymino : Liste_polyminos)
+        {
+            list_a_retourner.add(new Piece(polymino.typePolymino));
+        }
 
         return list_a_retourner;
     }

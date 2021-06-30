@@ -47,7 +47,7 @@ public class Solveur
 		if(export)
 			exportGraphical();
 		
-		List<Piece> listPieces = Probleme.getListPiece();
+		List<Piece> listPieces = Probleme.getListPieceFromList(probleme.Liste_polyminos_utilises);
 		SolveurCoordonneesPossible coordPossible = new SolveurCoordonneesPossible(probleme, listPieces, tableauTypePossible);
 		coordPossible.update();
 /*		for(SolveurPiece piece : coordPossible.listPieces)

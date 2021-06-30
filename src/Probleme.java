@@ -19,8 +19,14 @@ public class Probleme {
         //init des Pieces qui seront placees
         Liste_polyminos_utilises =new ArrayList<>();
         
+        // y a t il une contrainte de nombre de pièce ?
+        int nbPieces = ConfigPartie.listPolyminoToUse.size();
+        for(ContrainteLevel contrainte : contraintesList)
+        	if(contrainte.name().indexOf("NB_PIECES_PRESENTE_") != -1)
+        		nbPieces = contrainte.value;
+
         //placement Pieces
-        placementPieces();
+        placementPieces(nbPieces);
 
         //Creation des indices
         ensembleIndices =new EnsembleIndices(plateau, Liste_polyminos_utilises);
@@ -34,30 +40,30 @@ public class Probleme {
     	{
     		switch(contrainteLevel)
     		{
-    		case NB_PIECES_1:
-    		case NB_PIECES_2:
-    		case NB_PIECES_3:
-    		case NB_PIECES_4:
-    		case NB_PIECES_5:
-    		case NB_PIECES_6:
-            case NB_PIECES_7:
-            case NB_PIECES_8:
-            case NB_PIECES_9:
-            case NB_PIECES_10:
+    		case NB_PIECES_PRESENTE_1:
+    		case NB_PIECES_PRESENTE_2:
+    		case NB_PIECES_PRESENTE_3:
+    		case NB_PIECES_PRESENTE_4:
+    		case NB_PIECES_PRESENTE_5:
+    		case NB_PIECES_PRESENTE_6:
+            case NB_PIECES_PRESENTE_7:
+            case NB_PIECES_PRESENTE_8:
+            case NB_PIECES_PRESENTE_9:
+            case NB_PIECES_PRESENTE_10:
     			if(Liste_polyminos_utilises.size() != contrainteLevel.value)
     				return(false);
     			break;
-    		case NB_PIECES_RECTO_0:
-    		case NB_PIECES_RECTO_1:
-    		case NB_PIECES_RECTO_2:
-    		case NB_PIECES_RECTO_3:
-    		case NB_PIECES_RECTO_4:
-    		case NB_PIECES_RECTO_5:
-    		case NB_PIECES_RECTO_6:
-    		case NB_PIECES_RECTO_7:
-    		case NB_PIECES_RECTO_8:
-    		case NB_PIECES_RECTO_9:
-    		case NB_PIECES_RECTO_10:
+    		case NB_RECTO_0:
+    		case NB_RECTO_1:
+    		case NB_RECTO_2:
+    		case NB_RECTO_3:
+    		case NB_RECTO_4:
+    		case NB_RECTO_5:
+    		case NB_RECTO_6:
+    		case NB_RECTO_7:
+    		case NB_RECTO_8:
+    		case NB_RECTO_9:
+    		case NB_RECTO_10:
     			int nbRecto = 0;
     			for(Polymino polyminoToTest : Liste_polyminos_utilises)
     				if(polyminoToTest.recto)
@@ -87,7 +93,7 @@ public class Probleme {
     	return(true);
     }
 
-    private void placementPieces() {
+    private void placementPieces(int nbPieces) {
         //ici boucle pour essayer de placer des pieces
         int nb_essai=0;
         List <Piece> pieceListdisponibles =  getListPiece();
@@ -110,7 +116,7 @@ public class Probleme {
                 //reinitilise le test
                 nb_essai=0;
             }
-            if(Liste_polyminos_utilises.size() >= ConfigPartie.nb_pieces_max)
+            if(Liste_polyminos_utilises.size() >= nbPieces)
             	return;
             nb_essai++;
         }

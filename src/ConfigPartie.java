@@ -22,8 +22,8 @@ public class ConfigPartie {
     public static int modele = initSettings(3); // 1 = Fabien / 2 = Yoann / 3 = Recto Seul
     
     //config du plateau
-    public static int largeur_plateau = 4;
-    public static int hauteur_plateau = 4;
+    public static int largeur_plateau = 6;
+    public static int hauteur_plateau = 6;
 
     //config algo placement piece
     public static int nb_essai_max = 100000;
@@ -32,7 +32,7 @@ public class ConfigPartie {
 
     //config souhait indice
     //TODO comme pour Minecraft rendre parametrable l'affichage des indice. Piece neutre/visible/bon sens.
-    public static int nb_pieces_placees = 0;
+    public static int nb_pieces_placees = 1;
     public static int nb_pieces_face_connue = 0;
     public static int nb_pieces_rotation_connue = 0;
 

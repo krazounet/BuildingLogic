@@ -146,6 +146,25 @@ public class Probleme {
 
         return list_a_retourner;
     }
+    
+    public List <Polymino> getListInOrder()
+    {
+    	List<Polymino> listInOrder = new ArrayList<>();
+    	
+    	for(TypePolymino typePolymino : TypePolymino.values())
+    	{
+    		for(Polymino polymino : Liste_polyminos_utilises)
+    		{
+    			if(polymino.typePolymino == typePolymino)
+    			{
+    				listInOrder.add(polymino);
+    				break;
+    			}
+    		}
+    	}
+    	
+    	return(listInOrder);
+    }
 
     public void exportGraphical(String numero)
     {
@@ -160,7 +179,7 @@ public class Probleme {
         int x_poly = 150;
         int y_poly = 0;//tous les 3 polys on va à la ligne
         int nb_pol = 0;
-        for(Polymino poly : Liste_polyminos_utilises){
+        for(Polymino poly : getListInOrder()){
             if (nb_pol %3 == 0){y_poly=y_poly+150;x_poly=150;}
 
             // Gestion des indices recto verso

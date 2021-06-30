@@ -32,7 +32,7 @@ public class ConfigPartie {
 
     //config souhait indice
     //TODO comme pour Minecraft rendre parametrable l'affichage des indice. Piece neutre/visible/bon sens.
-    public static int nb_pieces_placees = 1;
+    public static int nb_pieces_placees = 0;
     public static int nb_pieces_face_connue = 0;
     public static int nb_pieces_rotation_connue = 0;
 

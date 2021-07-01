@@ -19,7 +19,7 @@ public class ConfigPartie {
     public static boolean remove_doublon;
     public static List<TypePolymino> listPolyminoToUse;
 
-    public static int modele = initSettings(3); // 1 = Fabien / 2 = Yoann / 3 = Recto Seul
+    public static int modele = initSettings(1); // 1 = Fabien / 2 = Yoann / 3 = Recto Seul
     
     //config du plateau
     public static int largeur_plateau = 4;
@@ -66,14 +66,14 @@ public class ConfigPartie {
     	{
     	case 1:
     	    modele_repartition = 1;
-    	    listPolyminoToUse = Arrays.asList(TypePolymino.I4, TypePolymino.O, TypePolymino.T, TypePolymino.L, TypePolymino.S);
+    	    listPolyminoToUse = Arrays.asList(TypePolymino.I4, TypePolymino.J, TypePolymino.O, TypePolymino.Z, TypePolymino.T);
     	    same_rectoverso = false;
     	    rectoverso = true;
     	    remove_doublon = true;
     		break;
     	case 2:
     	    modele_repartition = 2;
-    	    listPolyminoToUse = Arrays.asList(TypePolymino.I4, TypePolymino.O, TypePolymino.T, TypePolymino.L, TypePolymino.S);
+    	    listPolyminoToUse = Arrays.asList(TypePolymino.I4, TypePolymino.J, TypePolymino.O, TypePolymino.Z, TypePolymino.T);
     	    same_rectoverso = true;
     	    rectoverso = true;
     	    remove_doublon = true;

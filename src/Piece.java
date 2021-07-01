@@ -30,7 +30,7 @@ public class Piece {
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(0, 2), true));
 					tuileList.add(new Tuile(new HauteurTuile(1, 1), new Coordonnee(0, 3), true));
 				}
-				case L -> {
+				case J -> {
 					tuileList.add(new Tuile(new HauteurTuile(3, 2), new Coordonnee(0, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(1, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(0, 1), true));
@@ -42,7 +42,7 @@ public class Piece {
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(0, 1), true));
 					tuileList.add(new Tuile(new HauteurTuile(3, 1), new Coordonnee(1, 1), true));
 				}
-				case S -> {
+				case Z -> {
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(0, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(3, 2), new Coordonnee(1, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(1, 1), true));
@@ -64,7 +64,7 @@ public class Piece {
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(0, 2), true));
 					tuileList.add(new Tuile(new HauteurTuile(1, 1), new Coordonnee(0, 3), true));
 				}
-				case L -> {
+				case J -> {
 					tuileList.add(new Tuile(new HauteurTuile(3, 2), new Coordonnee(0, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(1, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(0, 1), true));
@@ -76,7 +76,7 @@ public class Piece {
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(0, 1), true));
 					tuileList.add(new Tuile(new HauteurTuile(1, 3), new Coordonnee(1, 1), true));
 				}
-				case S -> {
+				case Z -> {
 					tuileList.add(new Tuile(new HauteurTuile(2, 1), new Coordonnee(0, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(3, 2), new Coordonnee(1, 0), true));
 					tuileList.add(new Tuile(new HauteurTuile(2, 2), new Coordonnee(1, 1), true));

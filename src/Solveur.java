@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import Enum.TypeIndiceLigne;
+
 public class Solveur
 {
 	Probleme probleme;
@@ -91,24 +93,60 @@ public class Solveur
 		else
 		{
 			// Calcul des possibilités pour la colone
-			List<SolveurTypePossible.TypeCase> typePossibleInOrder = new ArrayList<>();
-			for(Integer hauteur : probleme.ensembleIndices.indicePicrossListVertical.get(x).list_hauteurs)
-				typePossibleInOrder.add(SolveurTypePossible.orderType.get(hauteur));
-	
-			List<SolveurTypePossible> listPossiblesConnus = new ArrayList<>();
-			for(int yy = 0; yy < ConfigPartie.hauteur_plateau; yy++)
-				listPossiblesConnus.add(tableauTypePossible[x][yy]);
-			List<SolveurTypePossible.TypeCase> typePossibleListVertical = getTypePossibleList(ConfigPartie.hauteur_plateau, typePossibleInOrder, y, listPossiblesConnus);
+			List<SolveurTypePossible.TypeCase> typePossibleListVertical;
+			
+        	boolean ligneToIgnore = false;
+			for(IndiceLigne indiceLigne : probleme.ensembleIndices.indiceLigneListVertical)
+			{
+        		if(indiceLigne.ligne == x && indiceLigne.typeIndiceLigne == TypeIndiceLigne.INDICES_PICROSS_HIDDEN)
+        		{
+        			ligneToIgnore = true;
+        			break;
+        		}
+			}
+			if(ligneToIgnore)
+			{
+				typePossibleListVertical = SolveurTypePossible.orderType;
+			}
+			else
+			{
+				List<SolveurTypePossible.TypeCase> typePossibleInOrder = new ArrayList<>();
+				for(Integer hauteur : probleme.ensembleIndices.indicePicrossListVertical.get(x).list_hauteurs)
+					typePossibleInOrder.add(SolveurTypePossible.orderType.get(hauteur));
+		
+				List<SolveurTypePossible> listPossiblesConnus = new ArrayList<>();
+				for(int yy = 0; yy < ConfigPartie.hauteur_plateau; yy++)
+					listPossiblesConnus.add(tableauTypePossible[x][yy]);
+				typePossibleListVertical = getTypePossibleList(ConfigPartie.hauteur_plateau, typePossibleInOrder, y, listPossiblesConnus);
+			}
 			
 			// Calcul des possibilités pour la ligne
-			typePossibleInOrder = new ArrayList<>();
-			for(Integer hauteur : probleme.ensembleIndices.indicePicrossListHorizontal.get(y).list_hauteurs)
-				typePossibleInOrder.add(SolveurTypePossible.orderType.get(hauteur));
-	
-			listPossiblesConnus = new ArrayList<>();
-			for(int xx = 0; xx < ConfigPartie.largeur_plateau; xx++)
-				listPossiblesConnus.add(tableauTypePossible[xx][y]);
-			List<SolveurTypePossible.TypeCase> typePossibleListHorizontal = getTypePossibleList(ConfigPartie.largeur_plateau, typePossibleInOrder, x, listPossiblesConnus);
+			List<SolveurTypePossible.TypeCase> typePossibleListHorizontal;
+			
+        	ligneToIgnore = false;
+			for(IndiceLigne indiceLigne : probleme.ensembleIndices.indiceLigneListHorizontal)
+			{
+        		if(indiceLigne.ligne == y && indiceLigne.typeIndiceLigne == TypeIndiceLigne.INDICES_PICROSS_HIDDEN)
+        		{
+        			ligneToIgnore = true;
+        			break;
+        		}
+			}
+			if(ligneToIgnore)
+			{
+				typePossibleListHorizontal = SolveurTypePossible.orderType;
+			}
+			else
+			{
+				List<SolveurTypePossible.TypeCase> typePossibleInOrder = new ArrayList<>();
+				for(Integer hauteur : probleme.ensembleIndices.indicePicrossListHorizontal.get(y).list_hauteurs)
+					typePossibleInOrder.add(SolveurTypePossible.orderType.get(hauteur));
+		
+				List<SolveurTypePossible> listPossiblesConnus = new ArrayList<>();
+				for(int xx = 0; xx < ConfigPartie.largeur_plateau; xx++)
+					listPossiblesConnus.add(tableauTypePossible[xx][y]);
+				typePossibleListHorizontal = getTypePossibleList(ConfigPartie.largeur_plateau, typePossibleInOrder, x, listPossiblesConnus);
+			}
 			
 	/*		int wideIndice = ConfigPartie.hauteur_plateau - nbIndices + 1;
 			for(int n = 0; n < ConfigPartie.hauteur_plateau - nbIndices; n++)

@@ -1,6 +1,7 @@
 import Enum.TypeIndicePiece;
 
-public class IndicePiece {
+public class IndicePiece
+{
 	Polymino polymino;
 	TypeIndicePiece typeIndicePiece;
 	

@@ -10,6 +10,8 @@ public class EnsembleIndices {
     List<IndicePicross> indicePicrossListHorizontal;
     List<IndiceCase> indiceCaseList;
     List<IndicePiece> indicePieceList;
+    List<IndiceLigne> indiceLigneListVertical;
+    List<IndiceLigne> indiceLigneListHorizontal;
 
     public EnsembleIndices(Plateau plateau, List <Polymino> liste_polyminos_utilises) {
 
@@ -51,6 +53,36 @@ public class EnsembleIndices {
         {
         	indicePieceList.add(new IndicePiece(liste_polyminos_clone.get(n % liste_polyminos_clone.size()), TypeIndicePiece.ROTATION_CONNU));
         }
+        
+        //Cr�ation des indices sur les lignes
+
+        // Vertical (pour garder la correspondance avec les indices Picross vertical = Colone)
+        indiceLigneListVertical = new ArrayList<>();
+        List<Integer> listColonne = new ArrayList<>();
+        for(int abs = 0; abs < ConfigPartie.largeur_plateau; abs++)
+        {
+        	listColonne.add(abs);
+        }
+        Collections.shuffle(listColonne);
+        
+        for(int n = 0; n < ConfigPartie.nb_lignes_picross_hidden_vert; n++)
+        {
+        	indiceLigneListVertical.add(new IndiceLigne(listColonne.get(n), TypeIndiceLigne.INDICES_PICROSS_HIDDEN));
+        }
+
+        // Horizontal
+        indiceLigneListHorizontal = new ArrayList<>();
+        List<Integer> listLigne = new ArrayList<>();
+        for(int abs = 0; abs < ConfigPartie.hauteur_plateau; abs++)
+        {
+        	listLigne.add(abs);
+        }
+        Collections.shuffle(listLigne);
+        
+        for(int n = 0; n < ConfigPartie.nb_lignes_picross_hidden_horiz; n++)
+        {
+        	indiceLigneListHorizontal.add(new IndiceLigne(listLigne.get(n), TypeIndiceLigne.INDICES_PICROSS_HIDDEN));
+        }
     }
 
     //a retravailler dynamiquement
@@ -65,27 +97,64 @@ public class EnsembleIndices {
         //Indicevretical
         int x_tmp=startXTableau;//calcul : espace pour les indices horizontal (largeur*50))
         int y_tmp;
-        for(IndicePicross ind : indicePicrossListVertical){
-            //pour chaque indice il fau calculer l'ordonnee initiale  pour que ça fasse joli
-            y_tmp = startYTableau - ConfigPartie.taille_tuile / 2 - ind.list_hauteurs.size() * tailleIndice + decalageIndice;
-            for (int haut : ind.list_hauteurs){
-                BufferedImage htmp = DrawTools.getImageSuperposed("image/" + ConfigPartie.style + "Type" + haut + ".png", "image/carreB.png");
-                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,18);
-                y_tmp=y_tmp+tailleIndice;
-            }
+        for(int idInd = 0; idInd < indicePicrossListVertical.size(); idInd++)
+        {
+        	IndicePicross ind = indicePicrossListVertical.get(idInd);
+        	boolean ligneToIgnore = false;
+        	for(IndiceLigne indiceLigne : indiceLigneListVertical)
+        	{
+        		if(indiceLigne.ligne == idInd && indiceLigne.typeIndiceLigne == TypeIndiceLigne.INDICES_PICROSS_HIDDEN)
+        		{
+        			ligneToIgnore = true;
+        			break;
+        		}
+        	}
+        	if(ligneToIgnore)
+        	{
+	            y_tmp = startYTableau - ConfigPartie.taille_tuile / 2 - tailleIndice;
+                DrawTools.drawImageTransformed(img_pbm,DrawTools.getImage("image/Unknow.png"),x_tmp,y_tmp,0,50);
+        	}
+        	else
+        	{
+	            //pour chaque indice il fau calculer l'ordonnee initiale  pour que ça fasse joli
+	            y_tmp = startYTableau - ConfigPartie.taille_tuile / 2 - ind.list_hauteurs.size() * tailleIndice + decalageIndice;
+	            for (int haut : ind.list_hauteurs){
+	                BufferedImage htmp = DrawTools.getImageSuperposed("image/" + ConfigPartie.style + "Type" + haut + ".png", "image/carreB.png");
+	                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,18);
+	                y_tmp=y_tmp+tailleIndice;
+	            }
+        	}
             x_tmp=x_tmp+ConfigPartie.taille_tuile;
         }
         //indice horizontal
 
         y_tmp=startYTableau;
-        for(IndicePicross ind : indicePicrossListHorizontal){
-            x_tmp=startXTableau - ConfigPartie.taille_tuile / 2 - ind.list_hauteurs.size() * tailleIndice + decalageIndice;
-            for (int haut : ind.list_hauteurs){
-                BufferedImage htmp = DrawTools.getImageSuperposed("image/" + ConfigPartie.style + "Type" + haut + ".png", "image/carreB.png");
-                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,18);
-                x_tmp=x_tmp+tailleIndice;
-            }
-
+        for(int idInd = 0; idInd < indicePicrossListHorizontal.size(); idInd++)
+        {
+        	IndicePicross ind = indicePicrossListHorizontal.get(idInd);
+        	boolean ligneToIgnore = false;
+        	for(IndiceLigne indiceLigne : indiceLigneListHorizontal)
+        	{
+        		if(indiceLigne.ligne == idInd && indiceLigne.typeIndiceLigne == TypeIndiceLigne.INDICES_PICROSS_HIDDEN)
+        		{
+        			ligneToIgnore = true;
+        			break;
+        		}
+        	}
+        	if(ligneToIgnore)
+        	{
+	            x_tmp = startXTableau - ConfigPartie.taille_tuile / 2 - tailleIndice;
+                DrawTools.drawImageTransformed(img_pbm,DrawTools.getImage("image/Unknow.png"),x_tmp,y_tmp,0,50);
+        	}
+        	else
+        	{
+	            x_tmp=startXTableau - ConfigPartie.taille_tuile / 2 - ind.list_hauteurs.size() * tailleIndice + decalageIndice;
+	            for (int haut : ind.list_hauteurs){
+	                BufferedImage htmp = DrawTools.getImageSuperposed("image/" + ConfigPartie.style + "Type" + haut + ".png", "image/carreB.png");
+	                DrawTools.drawImageTransformed(img_pbm,htmp,x_tmp,y_tmp,0,18);
+	                x_tmp=x_tmp+tailleIndice;
+	            }
+        	}
             y_tmp=y_tmp+ConfigPartie.taille_tuile;
         }
         //plateau vierge

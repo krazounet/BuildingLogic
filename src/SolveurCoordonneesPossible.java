@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import Enum.TypeIndiceLigne;
+
 public class SolveurCoordonneesPossible
 {
 	Probleme probleme;
@@ -71,6 +73,7 @@ public class SolveurCoordonneesPossible
 					{
 						if(isPolyminoPlacable(polymino, x, y))
 						{
+							boolean polyminoToIgnore = false;
 							for(IndicePiece indicePiece : probleme.ensembleIndices.indicePieceList)
 							{
 								if(indicePiece.polymino.typePolymino == polymino.typePolymino)
@@ -79,11 +82,12 @@ public class SolveurCoordonneesPossible
 									{
 									case EMPLACEMENT_CONNU:
 										if(indicePiece.polymino.getMinX() != x || indicePiece.polymino.getMinY() != y)
-											continue;
+											polyminoToIgnore = true;
 									}
 								}
 							}
-							polymino.listCoordonneesPossible.add(new Point(x, y));
+							if(!polyminoToIgnore)
+								polymino.listCoordonneesPossible.add(new Point(x, y));
 						}
 					}
 				}
@@ -208,6 +212,17 @@ public class SolveurCoordonneesPossible
 		// check des indices picross verticaux
 		for(int x = 0; x < ConfigPartie.largeur_plateau; x++)
 		{
+        	boolean ligneToIgnore = false;
+			for(IndiceLigne indiceLigne : probleme.ensembleIndices.indiceLigneListVertical)
+			{
+        		if(indiceLigne.ligne == x && indiceLigne.typeIndiceLigne == TypeIndiceLigne.INDICES_PICROSS_HIDDEN)
+        		{
+        			ligneToIgnore = true;
+        			break;
+        		}
+			}
+			if(ligneToIgnore)
+				continue;
 			List<SolveurTypePossible.TypeCase> typePossibleInOrder = new ArrayList<>();
 			for(Integer hauteur : probleme.ensembleIndices.indicePicrossListVertical.get(x).list_hauteurs)
 				typePossibleInOrder.add(SolveurTypePossible.orderType.get(hauteur));
@@ -232,6 +247,17 @@ public class SolveurCoordonneesPossible
 		// check des indices picross horizontaux
 		for(int y = 0; y < ConfigPartie.hauteur_plateau; y++)
 		{
+        	boolean ligneToIgnore = false;
+			for(IndiceLigne indiceLigne : probleme.ensembleIndices.indiceLigneListHorizontal)
+			{
+        		if(indiceLigne.ligne == y && indiceLigne.typeIndiceLigne == TypeIndiceLigne.INDICES_PICROSS_HIDDEN)
+        		{
+        			ligneToIgnore = true;
+        			break;
+        		}
+			}
+			if(ligneToIgnore)
+				continue;
 			List<SolveurTypePossible.TypeCase> typePossibleInOrder = new ArrayList<>();
 			for(Integer hauteur : probleme.ensembleIndices.indicePicrossListHorizontal.get(y).list_hauteurs)
 				typePossibleInOrder.add(SolveurTypePossible.orderType.get(hauteur));

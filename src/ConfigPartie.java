@@ -19,15 +19,15 @@ public class ConfigPartie {
     public static boolean remove_doublon;
     public static List<TypePolymino> listPolyminoToUse;
 
-    public static int modele = initSettings(1); // 1 = Fabien / 2 = Yoann / 3 = Recto Seul
+    public static int modele = initSettings(3); // 1 = Fabien / 2 = Yoann / 3 = Recto Seul
     
     //config du plateau
-    public static int largeur_plateau = 6;
-    public static int hauteur_plateau = 6;
+    public static int largeur_plateau = 5;
+    public static int hauteur_plateau = 5;
 
     //config algo placement piece
     public static int nb_essai_max = 100000;
-    public static int nb_chaque_piece = 2;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
+    public static int nb_chaque_piece = 1;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
     //TODO limiter le nombre de piece.
 
     //config souhait indice
@@ -35,6 +35,8 @@ public class ConfigPartie {
     public static int nb_pieces_placees = 1;
     public static int nb_pieces_face_connue = 0;
     public static int nb_pieces_rotation_connue = 0;
+    public static int nb_lignes_picross_hidden_vert = 3; // Pour garder la correspondance avec les indices Picross, vertical = colonne
+    public static int nb_lignes_picross_hidden_horiz = 3;
 
     //config export graphique
     public static int taille_tuile = 100;

@@ -22,12 +22,12 @@ public class ConfigPartie {
     public static int modele = initSettings(1); // 1 = Fabien / 2 = Yoann / 3 = Recto Seul
     
     //config du plateau
-    public static int largeur_plateau = 4;
-    public static int hauteur_plateau = 4;
+    public static int largeur_plateau = 6;
+    public static int hauteur_plateau = 6;
 
     //config algo placement piece
     public static int nb_essai_max = 100000;
-    public static int nb_chaque_piece = 1;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
+    public static int nb_chaque_piece = 2;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
     //TODO limiter le nombre de piece.
 
     //config souhait indice

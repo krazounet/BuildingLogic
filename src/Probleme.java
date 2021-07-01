@@ -158,7 +158,6 @@ public class Probleme {
     			if(polymino.typePolymino == typePolymino)
     			{
     				listInOrder.add(polymino);
-    				break;
     			}
     		}
     	}

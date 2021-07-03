@@ -15,6 +15,20 @@ public class SolveurPlacementPiece
 		this.idCoordonnee = idCoordonnee;
 	}
 	
+	public SolveurPlacementPiece(SolveurPiece piece)
+	{
+		this.piece = piece;
+		for(int n = 0; n < piece.listPolymino.size(); n++)
+		{
+			SolveurPolymino polymino = piece.listPolymino.get(n);
+			if(polymino.listCoordonneesPossible.size() > 0)
+			{
+				this.idPolymino = n;
+				this.idCoordonnee = 0;
+			}
+		}
+	}
+	
 	public SolveurPolymino getActualPolymino()
 	{
 		return(piece.listPolymino.get(idPolymino));

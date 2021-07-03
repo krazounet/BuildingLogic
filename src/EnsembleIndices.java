@@ -83,6 +83,22 @@ public class EnsembleIndices {
         {
         	indiceLigneListHorizontal.add(new IndiceLigne(listLigne.get(n), TypeIndiceLigne.INDICES_PICROSS_HIDDEN));
         }
+        
+        // Création des indices sur les cases vides
+        List<Case> listCasesVides = new ArrayList<>();
+        listCasesVides.addAll(plateau.caseVideList);
+        Collections.shuffle(listCasesVides);
+        
+        indiceCaseList = new ArrayList<>();
+        if(ConfigPartie.nb_cases_vides > plateau.caseVideList.size())
+		{
+			System.out.println("Attention !!! Pas assez de cases vides !!!");
+			ConfigPartie.nb_cases_vides = plateau.caseVideList.size();
+		}
+        for(int n = 0; n < ConfigPartie.nb_cases_vides; n++)
+        {
+        	indiceCaseList.add(new IndiceCase(listCasesVides.get(n).coordonnee, TypeIndiceCase.VIDE));
+        }
     }
 
     //a retravailler dynamiquement
@@ -163,7 +179,19 @@ public class EnsembleIndices {
         y_tmp=startYTableau;
         for (int abs=0; abs < ConfigPartie.largeur_plateau; abs++){
             for (int ord=0; ord < ConfigPartie.hauteur_plateau; ord++){
-                DrawTools.drawImageCenter(img_pbm,img_case_vide,x_tmp+(abs*100),y_tmp+(ord*100));
+            	boolean caseVide = false;
+            	for(IndiceCase indiceCase : indiceCaseList)
+            	{
+            		if(indiceCase.typeIndiceCase == TypeIndiceCase.VIDE)
+            		{
+            			if(indiceCase.coord.x == abs && indiceCase.coord.y == ord)
+            				caseVide = true;
+            		}
+            	}
+            	if(caseVide)
+                    DrawTools.drawImageCenter(img_pbm,DrawTools.getImage("image/carreVide.png"),x_tmp+(abs*100),y_tmp+(ord*100));
+            	else
+            		DrawTools.drawImageCenter(img_pbm,img_case_vide,x_tmp+(abs*100),y_tmp+(ord*100));
             }
         }
         

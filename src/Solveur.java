@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import Enum.TypeIndiceCase;
 import Enum.TypeIndiceLigne;
+import Enum.TypePolymino;
 
 public class Solveur
 {
@@ -23,8 +25,25 @@ public class Solveur
 		{
 			for(int y = 0; y < ConfigPartie.hauteur_plateau; y++)
 			{
-				SolveurTypePossible solveurTypePossible = new SolveurTypePossible(SolveurTypePossible.orderType);
-				tableauTypePossible[x][y] = solveurTypePossible;
+            	boolean caseVide = false;
+            	for(IndiceCase indiceCase : probleme.ensembleIndices.indiceCaseList)
+            	{
+            		if(indiceCase.typeIndiceCase == TypeIndiceCase.VIDE)
+            		{
+            			if(indiceCase.coord.x == x && indiceCase.coord.y == y)
+            				caseVide = true;
+            		}
+            	}
+            	if(caseVide)
+            	{
+					SolveurTypePossible solveurTypePossible = new SolveurTypePossible(Arrays.asList(SolveurTypePossible.TypeCase.VIDE));
+					tableauTypePossible[x][y] = solveurTypePossible;
+            	}
+            	else
+            	{
+					SolveurTypePossible solveurTypePossible = new SolveurTypePossible(SolveurTypePossible.orderType);
+					tableauTypePossible[x][y] = solveurTypePossible;
+            	}
 			}
 		}
 		
@@ -49,16 +68,48 @@ public class Solveur
 		if(export)
 			exportGraphical();
 		
-		List<Piece> listPieces = Probleme.getListPieceFromList(probleme.Liste_polyminos_utilises);
+		List<Piece> listPieces = Probleme.getListPieceFromList(probleme.Liste_polyminos_utilises, probleme.ensembleIndices);
 		SolveurCoordonneesPossible coordPossible = new SolveurCoordonneesPossible(probleme, listPieces, tableauTypePossible);
 		coordPossible.update();
-/*		for(SolveurPiece piece : coordPossible.listPieces)
+		for(SolveurPiece piece : coordPossible.listPieces)
 		{
-			System.out.println("Nombre de positions possibles : " + piece.getNbPositionsPossible());
-		}*/
+			System.out.println("Nombre de positions possibles pour la pièce '" + piece.listPolymino.get(0).typePolymino + "' : " + piece.getNbPositionsPossible());
+		}
+		
+		// Calcul du diviseur en rapport au pièces identiques
+		int diviseur = getDiviseur();
 		
 		int nbSolutions = coordPossible.tryToSolve(export);
-		return(nbSolutions);
+		return(nbSolutions / diviseur);
+	}
+	
+	private int getDiviseur()
+	{
+		int value = 1;
+		
+/*		//On liste déjà la liste des types de pièces sur le plateau
+		List<TypePolymino> listTypes = new ArrayList<>();
+		for(Polymino polymino : probleme.Liste_polyminos_utilises)
+		{
+			if(!listTypes.contains(polymino.typePolymino))
+				listTypes.add(polymino.typePolymino);
+		}
+		
+		for(TypePolymino typePolymino : listTypes)
+		{
+			int minimumCase = probleme.Liste_polyminos_utilises.size();
+			for(Polymino polymino : probleme.Liste_polyminos_utilises)
+			{
+				if(polymino.typePolymino == typePolymino)
+				{
+					
+				}
+			}
+			
+			
+		}*/
+		
+		return(value);
 	}
 	
 	private void exportGraphical()

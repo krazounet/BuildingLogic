@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import Enum.TypeIndiceLigne;
+import Enum.TypePolymino;
 
 public class SolveurCoordonneesPossible
 {
@@ -23,7 +24,7 @@ public class SolveurCoordonneesPossible
 		}
 		
 		// On supprimme les polyminos interdit par les indices
-		for(SolveurPiece piece : this.listPieces)
+/*		for(SolveurPiece piece : this.listPieces)
 		{
 			for(int idPolymino = 0; idPolymino < piece.listPolymino.size(); idPolymino++)
 			{
@@ -56,7 +57,7 @@ public class SolveurCoordonneesPossible
 					}
 				}
 			}
-		}
+		}*/
 		
 		this.tableauTypePossible = tableauTypePossible;
 	}
@@ -113,6 +114,19 @@ public class SolveurCoordonneesPossible
 	
 	public int tryToSolve(boolean export)
 	{
+		// Converti la solution en SolveurPlacementPiece
+		TypePolymino[][] tableauTypePolymino = new TypePolymino[ConfigPartie.largeur_plateau][ConfigPartie.hauteur_plateau];
+		SolveurTypePossible.TypeCase[][] tableauTypeCase = new SolveurTypePossible.TypeCase[ConfigPartie.largeur_plateau][ConfigPartie.hauteur_plateau];
+
+		for(int x = 0; x < ConfigPartie.largeur_plateau; x++)
+		{
+			for(int y = 0; y < ConfigPartie.hauteur_plateau; y++)
+			{
+				tableauTypePolymino[x][y] = probleme.getTypePolyminoThisCase(x, y);
+				tableauTypeCase[x][y] = SolveurTypePossible.orderType.get(probleme.getTypeCaseThisCase(x, y));
+			}
+		}
+		
 		int nbSolutions = 0;
 		
 		List<SolveurPlacementPiece> actualSolution = new ArrayList<>();
@@ -127,7 +141,7 @@ public class SolveurCoordonneesPossible
 			if(check(actualSolution))
 			{
 //				System.out.println("Une disposition correcte !!! (sans chevauchement)");
-				if(checkFinal(actualSolution))
+				if(checkFinal(actualSolution, tableauTypePolymino, tableauTypeCase))
 				{
 //					System.out.println("Une disposition correcte totale !!!");
 					if(export)
@@ -207,8 +221,31 @@ public class SolveurCoordonneesPossible
 		return(true);
 	}
 	
-	public boolean checkFinal(List<SolveurPlacementPiece> actualSolution)
+	public boolean checkFinal(List<SolveurPlacementPiece> actualSolution, TypePolymino[][] tableauTypePolymino, SolveurTypePossible.TypeCase[][] tableauTypeCase)
 	{
+		// Converti la solution en SolveurPlacementPiece
+		TypePolymino[][] tableauTypePolyminoActual = new TypePolymino[ConfigPartie.largeur_plateau][ConfigPartie.hauteur_plateau];
+		SolveurTypePossible.TypeCase[][] tableauTypeCaseActual = new SolveurTypePossible.TypeCase[ConfigPartie.largeur_plateau][ConfigPartie.hauteur_plateau];
+
+		boolean sameSolution = true;
+		for(int x = 0; x < ConfigPartie.largeur_plateau; x++)
+		{
+			if(!sameSolution)
+				break;
+			for(int y = 0; y < ConfigPartie.hauteur_plateau; y++)
+			{
+				tableauTypePolyminoActual[x][y] = getTypePolyminoThisCase(actualSolution, x, y);
+				tableauTypeCaseActual[x][y] = SolveurTypePossible.orderType.get(getTypeCaseThisCase(actualSolution, x, y));
+				if(tableauTypePolyminoActual[x][y] != tableauTypePolymino[x][y] || tableauTypeCaseActual[x][y] != tableauTypeCase[x][y])
+				{
+					sameSolution = false;
+					break;
+				}
+			}
+		}
+		if(sameSolution)
+			return(false);
+
 		// check des indices picross verticaux
 		for(int x = 0; x < ConfigPartie.largeur_plateau; x++)
 		{
@@ -297,6 +334,22 @@ public class SolveurCoordonneesPossible
 		return(null);
 	}
 
+	public TypePolymino getTypePolyminoThisCase(List<SolveurPlacementPiece> actualSolution, int x, int y)
+	{
+		for(SolveurPlacementPiece piece : actualSolution)
+		{
+			Point actualCoord = piece.getActualCoordonnee();
+			for(Tuile tuile : piece.getActualPolymino().tuileList)
+			{
+				if(x == tuile.coordonnee.x + actualCoord.x && y == tuile.coordonnee.y + actualCoord.y)
+				{
+					return(piece.getActualPolymino().typePolymino);
+				}
+			}
+		}
+		return(null);
+	}
+
 	public int getIDPolyminoThisCase(List<SolveurPlacementPiece> actualSolution, int x, int y)
 	{
 		for(SolveurPlacementPiece piece : actualSolution)
@@ -312,4 +365,20 @@ public class SolveurCoordonneesPossible
 		}
 		return(-1);
 	}
+	
+    public int getTypeCaseThisCase(List<SolveurPlacementPiece> actualSolution, int x, int y)
+    {
+		for(SolveurPlacementPiece piece : actualSolution)
+		{
+			Point actualCoord = piece.getActualCoordonnee();
+			for(Tuile tuile : piece.getActualPolymino().tuileList)
+			{
+				if(x == tuile.coordonnee.x + actualCoord.x && y == tuile.coordonnee.y + actualCoord.y)
+				{
+					return(tuile.getHauteur());
+				}
+			}
+		}
+		return(0);
+    }
 }

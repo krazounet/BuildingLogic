@@ -19,7 +19,7 @@ public class ConfigPartie {
     public static boolean remove_doublon;
     public static List<TypePolymino> listPolyminoToUse;
 
-    public static int modele = initSettings(3); // 1 = Fabien / 2 = Yoann / 3 = Recto Seul
+    public static int modele = initSettings(1); // 1 = Fabien / 2 = Yoann / 3 = Recto Seul
     
     //config du plateau
     public static int largeur_plateau = 5;
@@ -27,21 +27,22 @@ public class ConfigPartie {
 
     //config algo placement piece
     public static int nb_essai_max = 100000;
-    public static int nb_chaque_piece = 1;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
+    public static int nb_chaque_piece = 2;//2 veut dire que chaque PIECE (OSTLI) est présente 2 fois.
     //TODO limiter le nombre de piece.
 
     //config souhait indice
     //TODO comme pour Minecraft rendre parametrable l'affichage des indice. Piece neutre/visible/bon sens.
-    public static int nb_pieces_placees = 1;
+    public static int nb_pieces_placees = 0;
     public static int nb_pieces_face_connue = 0;
     public static int nb_pieces_rotation_connue = 0;
+    public static int nb_cases_vides = 0;
     public static int nb_lignes_picross_hidden_vert = 3; // Pour garder la correspondance avec les indices Picross, vertical = colonne
     public static int nb_lignes_picross_hidden_horiz = 3;
 
     //config export graphique
     public static int taille_tuile = 100;
     public static int epaisseur_bord = 6;
-    public static Color color_bordure_recto = Color.BLACK;
+    public static Color color_bordure_recto = Color.RED;
     public static Color color_bordure_verso = new Color(0, 138, 255);
     public static String rep_image="image/";
     public static String rep_image_polymino ="image/Polymino/";
@@ -82,7 +83,7 @@ public class ConfigPartie {
     		break;
     	case 3:
     	    modele_repartition = 3;
-    	    listPolyminoToUse = Arrays.asList(TypePolymino.I4, TypePolymino.I3, TypePolymino.I2, TypePolymino.O, TypePolymino.T, TypePolymino.L, TypePolymino.J, TypePolymino.S, TypePolymino.Z, TypePolymino.V);
+    	    listPolyminoToUse = Arrays.asList(TypePolymino.I4, TypePolymino.O, TypePolymino.T, TypePolymino.L, TypePolymino.J, TypePolymino.S, TypePolymino.Z, TypePolymino.V);
     	    same_rectoverso = false;
     	    rectoverso = false;
     	    remove_doublon = true;

@@ -136,13 +136,52 @@ public class Probleme {
         return list_a_retourner;
     }
 
-    public static List<Piece> getListPieceFromList(List <Polymino> Liste_polyminos) {
-        //chaque polymino est ajoute autant de fois que nÃ©cessaire.
+    public static List<Piece> getListPieceFromList(List <Polymino> Liste_polyminos, EnsembleIndices ensembleIndices)
+    {
         List <Piece> list_a_retourner=new ArrayList<>();
         for(Polymino polymino : Liste_polyminos)
         {
-            list_a_retourner.add(new Piece(polymino.typePolymino));
+        	Piece piece = new Piece(polymino.typePolymino);
+            list_a_retourner.add(piece);
+
+            // On teste si la pièce est concernée par un indice face connu
+        	for(IndicePiece indicePiece : ensembleIndices.indicePieceList)
+        	{
+        		if(polymino == indicePiece.polymino)
+        		{
+	        		switch(indicePiece.typeIndicePiece)
+	        		{
+	        		case FACE_CONNU:
+	        			boolean correctface = indicePiece.polymino.recto;
+	        			for(int n = 0; n < piece.polyminoList.size(); n++)
+	        			{
+	        				Polymino polyminoToTest = piece.polyminoList.get(n);
+	        				if(polyminoToTest.recto != correctface)
+	        				{
+	        					piece.polyminoList.remove(polyminoToTest);
+	        					n--;
+	        				}
+	        			}
+	        			break;
+	        		case EMPLACEMENT_CONNU:
+	        		case ROTATION_CONNU:
+	        			Polymino correctOrientation = indicePiece.polymino;
+	        			for(int n = 0; n < piece.polyminoList.size(); n++)
+	        			{
+	        				Polymino polyminoToTest = piece.polyminoList.get(n);
+	        				if(polyminoToTest.orientation != correctOrientation.orientation || polyminoToTest.recto != correctOrientation.recto)
+	        				{
+	        					piece.polyminoList.remove(polyminoToTest);
+	        					n--;
+	        				}
+	        			}
+	        			break;
+	        		}
+        		}
+        	}
         }
+        
+        // On supprimme les rotations qui ne peuvent pas exister
 
         return list_a_retourner;
     }
@@ -163,6 +202,38 @@ public class Probleme {
     	}
     	
     	return(listInOrder);
+    }
+    
+    public TypePolymino getTypePolyminoThisCase(int x, int y)
+    {
+    	for(Polymino polymino : Liste_polyminos_utilises)
+    	{
+    		for(Tuile tuile : polymino.tuileList)
+    		{
+    			if(tuile.coordonnee.x == x && tuile.coordonnee.y == y)
+    			{
+    				return(polymino.typePolymino);
+    			}
+    		}
+    	}
+    	
+    	return(null);
+    }
+
+    public int getTypeCaseThisCase(int x, int y)
+    {
+    	for(Polymino polymino : Liste_polyminos_utilises)
+    	{
+    		for(Tuile tuile : polymino.tuileList)
+    		{
+    			if(tuile.coordonnee.x == x && tuile.coordonnee.y == y)
+    			{
+    				return(tuile.getHauteur());
+    			}
+    		}
+    	}
+    	
+    	return(0);
     }
 
     public void exportGraphical(String numero)

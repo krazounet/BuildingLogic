@@ -12,6 +12,7 @@ public class ConfigPartie {
     
     //Config Style
     public static String style = "CT"; //CT = City / DI = Diamonds / VG = Vegetables / AB = Abstract
+    public static int nbProblemesVoulus = 10;
     
     public static int modele_repartition;
     public static boolean same_rectoverso;
@@ -33,16 +34,16 @@ public class ConfigPartie {
     //config souhait indice
     //TODO comme pour Minecraft rendre parametrable l'affichage des indice. Piece neutre/visible/bon sens.
     public static int nb_pieces_placees = 0;
-    public static int nb_pieces_face_connue = 0;
     public static int nb_pieces_rotation_connue = 0;
-    public static int nb_cases_vides = 0;
-    public static int nb_lignes_picross_hidden_vert = 3; // Pour garder la correspondance avec les indices Picross, vertical = colonne
-    public static int nb_lignes_picross_hidden_horiz = 3;
+    public static int nb_pieces_face_connue = 0;
+    public static int nb_cases_vides = 2;
+    public static int nb_lignes_picross_hidden_vert = 1; // Pour garder la correspondance avec les indices Picross, vertical = colonne
+    public static int nb_lignes_picross_hidden_horiz = 1;
 
     //config export graphique
     public static int taille_tuile = 100;
     public static int epaisseur_bord = 6;
-    public static Color color_bordure_recto = Color.RED;
+    public static Color color_bordure_recto = new Color(16, 188, 12);
     public static Color color_bordure_verso = new Color(0, 138, 255);
     public static String rep_image="image/";
     public static String rep_image_polymino ="image/Polymino/";

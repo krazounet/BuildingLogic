@@ -73,43 +73,23 @@ public class Solveur
 		coordPossible.update();
 		for(SolveurPiece piece : coordPossible.listPieces)
 		{
+			for(int n = 0; n < piece.listPolymino.size(); n++)
+			{
+				SolveurPolymino polymino = piece.listPolymino.get(n);
+				if(polymino.listCoordonneesPossible.size() == 0)
+				{
+					piece.listPolymino.remove(polymino);
+					n--;
+				}
+			}
+		}
+		for(SolveurPiece piece : coordPossible.listPieces)
+		{
 			System.out.println("Nombre de positions possibles pour la pièce '" + piece.listPolymino.get(0).typePolymino + "' : " + piece.getNbPositionsPossible());
 		}
 		
-		// Calcul du diviseur en rapport au pièces identiques
-		int diviseur = getDiviseur();
-		
 		int nbSolutions = coordPossible.tryToSolve(export);
-		return(nbSolutions / diviseur);
-	}
-	
-	private int getDiviseur()
-	{
-		int value = 1;
-		
-/*		//On liste déjà la liste des types de pièces sur le plateau
-		List<TypePolymino> listTypes = new ArrayList<>();
-		for(Polymino polymino : probleme.Liste_polyminos_utilises)
-		{
-			if(!listTypes.contains(polymino.typePolymino))
-				listTypes.add(polymino.typePolymino);
-		}
-		
-		for(TypePolymino typePolymino : listTypes)
-		{
-			int minimumCase = probleme.Liste_polyminos_utilises.size();
-			for(Polymino polymino : probleme.Liste_polyminos_utilises)
-			{
-				if(polymino.typePolymino == typePolymino)
-				{
-					
-				}
-			}
-			
-			
-		}*/
-		
-		return(value);
+		return(nbSolutions);
 	}
 	
 	private void exportGraphical()

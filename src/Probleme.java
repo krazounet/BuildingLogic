@@ -268,7 +268,7 @@ public class Probleme {
             
             BufferedImage img_poly=DrawTools.getImage(ConfigPartie.rep_image_polymino+poly.typePolymino+stringPolyToDraw+".png");
             
-            // Gestion des 
+            // Gestion des indices rotation connu
             
             for(IndicePiece indiceToCheck : ensembleIndices.indicePieceList)
             {
@@ -279,6 +279,18 @@ public class Probleme {
             		img_poly = img_poly_rotated;
             	}
             }
+            
+            // Gestion des indices position connue
+            
+/*            for(IndicePiece indiceToCheck : ensembleIndices.indicePieceList)
+            {
+            	if(indiceToCheck.polymino == poly && indiceToCheck.typeIndicePiece == TypeIndicePiece.EMPLACEMENT_CONNU)
+            	{
+            		BufferedImage img_poly_rotated =DrawTools.getImage(ConfigPartie.rep_image_polymino + "Place.png");
+            		DrawTools.drawImageTransformed(img_poly_rotated, img_poly, img_poly.getWidth() / 2, img_poly.getHeight() / 2, 0, 100);
+            		img_poly = img_poly_rotated;
+            	}
+            }*/
             
             DrawTools.drawImageTransformed(fond,DrawTools.Zoom(img_poly, 150),x_poly,y_poly,0,100);
             x_poly=x_poly+150;
